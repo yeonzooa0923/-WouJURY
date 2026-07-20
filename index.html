@@ -212,7 +212,7 @@
                             </div>
                         </div>
 
-                        <!-- 5대 프로필 핵심 링크 소셜 연동 버튼그룹 (글자 제거 및 깔끔한 원형/원형에 가까운 사각형 구조) -->
+                        <!-- 5대 프로필 핵심 링크 소셜 연동 버튼그룹 (둥근 아이콘 전용 스타일) -->
                         <div class="flex flex-wrap justify-center sm:justify-start gap-3">
                             <a id="link-soop" href="https://www.sooplive.com/station/woujury" target="_blank" 
                                class="w-11 h-11 rounded-full bg-[#2D8CFF] hover:bg-[#1a7beb] text-white flex items-center justify-center text-lg shadow-sm hover:scale-110 active:scale-95 transition-all" title="숲 방송국 🐰">
@@ -689,13 +689,15 @@
                     const docSnap = await getDoc(docRef);
                     if (docSnap.exists()) {
                         const data = docSnap.data();
-                        globalProfileData = data.profile || defaultProfileData;
-                        globalNoticeData = data.notice || defaultNoticeData;
-                        globalScheduleData = data.schedule || defaultScheduleData;
-                        globalDdaysData = data.ddays || defaultDdaysData;
-                        globalUpboData = data.upbo || defaultUpboData;
-                        globalSigballoonData = data.sigballoon || defaultSigballoonData;
-                        globalSections = data.sections || defaultSections;
+                        
+                        // DB에 값이 명시적으로 없는 경우에만 프리셋으로 초기화 및 복사 적용
+                        globalProfileData = data.profile || JSON.parse(JSON.stringify(defaultProfileData));
+                        globalNoticeData = data.notice !== undefined ? data.notice : JSON.parse(JSON.stringify(defaultNoticeData));
+                        globalScheduleData = data.schedule !== undefined ? data.schedule : JSON.parse(JSON.stringify(defaultScheduleData));
+                        globalDdaysData = data.ddays !== undefined ? data.ddays : JSON.parse(JSON.stringify(defaultDdaysData));
+                        globalUpboData = data.upbo !== undefined ? data.upbo : JSON.parse(JSON.stringify(defaultUpboData));
+                        globalSigballoonData = data.sigballoon !== undefined ? data.sigballoon : JSON.parse(JSON.stringify(defaultSigballoonData));
+                        globalSections = data.sections || JSON.parse(JSON.stringify(defaultSections));
 
                         // 스토리지에 캐시 백업
                         safeSetStorage('juryProfile', globalProfileData);
@@ -728,13 +730,13 @@
         }
 
         function fallbackToLocal() {
-            globalProfileData = safeGetStorage('juryProfile', defaultProfileData);
-            globalNoticeData = safeGetStorage('juryNotice', defaultNoticeData);
-            globalScheduleData = safeGetStorage('jurySchedule', defaultScheduleData);
-            globalDdaysData = safeGetStorage('juryDdays', defaultDdaysData);
-            globalUpboData = safeGetStorage('juryUpbo', defaultUpboData);
-            globalSigballoonData = safeGetStorage('jurySigballoon', defaultSigballoonData);
-            globalSections = safeGetStorage('jurySections', defaultSections);
+            globalProfileData = safeGetStorage('juryProfile', JSON.parse(JSON.stringify(defaultProfileData)));
+            globalNoticeData = safeGetStorage('juryNotice', JSON.parse(JSON.stringify(defaultNoticeData)));
+            globalScheduleData = safeGetStorage('jurySchedule', JSON.parse(JSON.stringify(defaultScheduleData)));
+            globalDdaysData = safeGetStorage('juryDdays', JSON.parse(JSON.stringify(defaultDdaysData)));
+            globalUpboData = safeGetStorage('juryUpbo', JSON.parse(JSON.stringify(defaultUpboData)));
+            globalSigballoonData = safeGetStorage('jurySigballoon', JSON.parse(JSON.stringify(defaultSigballoonData)));
+            globalSections = safeGetStorage('jurySections', JSON.parse(JSON.stringify(defaultSections)));
         }
 
         async function updateFirestore(key, data) {
@@ -900,20 +902,28 @@
                     `;
                 } else if (section.id === 'ddays') {
                     let ddayRows = '';
-                    const ddays = globalDdaysData.length > 0 ? globalDdaysData : defaultDdaysData;
+                    const ddays = globalDdaysData;
                     
-                    ddays.forEach(dday => {
-                        const ddayResult = calculateDDayString(dday.type, dday.date);
-                        ddayRows += `
-                            <div class="flex items-center justify-between p-3.5 bg-[#FFF0F2] dark:bg-[#1E1415] rounded-2xl border border-brand/30">
-                                <div class="flex flex-col">
-                                    <span class="text-sm font-bold text-brand-dark dark:text-gray-200">${dday.title}</span>
-                                    <span class="text-[10px] text-gray-400 font-bold mt-0.5">${dday.date}</span>
-                                </div>
-                                <div class="text-right">${ddayResult}</div>
+                    if (ddays.length === 0) {
+                        ddayRows = `
+                            <div class="col-span-full p-6 text-center text-gray-400 font-bold text-xs sm:text-sm bg-[#FFF0F2]/30 rounded-2xl border border-dashed border-brand/40">
+                                📅 등록된 기념일이 없습니다잇!
                             </div>
                         `;
-                    });
+                    } else {
+                        ddays.forEach(dday => {
+                            const ddayResult = calculateDDayString(dday.type, dday.date);
+                            ddayRows += `
+                                <div class="flex items-center justify-between p-3.5 bg-[#FFF0F2] dark:bg-[#1E1415] rounded-2xl border border-brand/30">
+                                    <div class="flex flex-col">
+                                        <span class="text-sm font-bold text-brand-dark dark:text-gray-200">${dday.title}</span>
+                                        <span class="text-[10px] text-gray-400 font-bold mt-0.5">${dday.date}</span>
+                                    </div>
+                                    <div class="text-right">${ddayResult}</div>
+                                </div>
+                            `;
+                        });
+                    }
 
                     sectionHtml = `
                         <div class="bg-white dark:bg-brand-darkCardBg border-4 border-brand rounded-3xl p-6 box-shadow-lovely relative transition-colors duration-300">
@@ -956,38 +966,46 @@
                     `;
                 } else if (section.id === 'notice') {
                     let noticeRows = '';
-                    const notices = globalNoticeData.length > 0 ? globalNoticeData : defaultNoticeData;
+                    const notices = globalNoticeData;
 
-                    notices.forEach((notice, index) => {
-                        let badgeClass = '', bgClass = 'p-3 rounded-2xl hover:bg-[#FFF0F2]/50 dark:hover:bg-brand-dark/30 transition-all';
-                        if (notice.typeColor === 'red') { 
-                            badgeClass = 'bg-[#FFCCD3] text-brand-dark border-2 border-brand'; 
-                            bgClass = 'bg-[#FFF0F2] dark:bg-brand-dark p-4 rounded-2xl border-2 border-brand'; 
-                        } else if (notice.typeColor === 'blue') { 
-                            badgeClass = 'bg-blue-100 text-blue-500 dark:bg-blue-950/50 dark:text-blue-300'; 
-                        } else { 
-                            badgeClass = 'bg-gray-100 text-gray-600 dark:bg-zinc-800 dark:text-pink-200'; 
-                        }
-
-                        const actionLink = notice.link ? `
-                            <div class="mt-2">
-                                <a href="${notice.link}" target="_blank" class="inline-flex items-center gap-1 bg-[#FF8E9E] hover:bg-[#ff7386] text-white text-[11px] px-2.5 py-1 rounded-lg border border-brand shadow-sm transition-all">
-                                    공지 보러가기 <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
-                                </a>
-                            </div>
-                        ` : '';
-
-                        noticeRows += `
-                            <li class="${bgClass} font-semibold text-xs sm:text-sm">
-                                <div class="flex justify-between items-center mb-1.5">
-                                    <span class="${badgeClass} text-[10px] px-2 py-0.5 rounded-lg font-bold">${notice.type}</span>
-                                    <span class="text-[10px] text-gray-400 font-bold">${notice.date}</span>
-                                </div>
-                                <p class="text-gray-800 dark:text-pink-150 ${notice.typeColor === 'red' ? 'font-bold text-brand-dark dark:text-brand' : ''}">${notice.content}</p>
-                                ${actionLink}
+                    if (notices.length === 0) {
+                        noticeRows = `
+                            <li class="p-6 text-center text-gray-400 font-bold text-xs sm:text-sm bg-[#FFF0F2]/30 rounded-2xl border border-dashed border-brand/40">
+                                📢 등록된 공지사항이 아직 없습니다잇! 🌸
                             </li>
                         `;
-                    });
+                    } else {
+                        notices.forEach((notice, index) => {
+                            let badgeClass = '', bgClass = 'p-3 rounded-2xl hover:bg-[#FFF0F2]/50 dark:hover:bg-brand-dark/30 transition-all';
+                            if (notice.typeColor === 'red') { 
+                                badgeClass = 'bg-[#FFCCD3] text-brand-dark border-2 border-brand'; 
+                                bgClass = 'bg-[#FFF0F2] dark:bg-brand-dark p-4 rounded-2xl border-2 border-brand'; 
+                            } else if (notice.typeColor === 'blue') { 
+                                badgeClass = 'bg-blue-100 text-blue-500 dark:bg-blue-950/50 dark:text-blue-300'; 
+                            } else { 
+                                badgeClass = 'bg-gray-100 text-gray-600 dark:bg-zinc-800 dark:text-pink-200'; 
+                            }
+
+                            const actionLink = notice.link ? `
+                                <div class="mt-2">
+                                    <a href="${notice.link}" target="_blank" class="inline-flex items-center gap-1 bg-[#FF8E9E] hover:bg-[#ff7386] text-white text-[11px] px-2.5 py-1 rounded-lg border border-brand shadow-sm transition-all">
+                                        공지 보러가기 <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                                    </a>
+                                </div>
+                            ` : '';
+
+                            noticeRows += `
+                                <li class="${bgClass} font-semibold text-xs sm:text-sm">
+                                    <div class="flex justify-between items-center mb-1.5">
+                                        <span class="${badgeClass} text-[10px] px-2 py-0.5 rounded-lg font-bold">${notice.type}</span>
+                                        <span class="text-[10px] text-gray-400 font-bold">${notice.date}</span>
+                                    </div>
+                                    <p class="text-gray-800 dark:text-pink-150 ${notice.typeColor === 'red' ? 'font-bold text-brand-dark dark:text-brand' : ''}">${notice.content}</p>
+                                    ${actionLink}
+                                </li>
+                            `;
+                        });
+                    }
 
                     sectionHtml = `
                         <div class="bg-white dark:bg-brand-darkCardBg border-4 border-brand rounded-3xl p-6 box-shadow-lovely relative transition-colors duration-300">
@@ -1041,22 +1059,30 @@
                     `;
                 } else if (section.id === 'upbo') {
                     let upboCards = '';
-                    const upboList = globalUpboData.length > 0 ? globalUpboData : defaultUpboData;
+                    const upboList = globalUpboData;
 
-                    upboList.forEach(user => {
-                        const totalItems = (user.items || []).reduce((sum, item) => sum + item.count, 0);
-                        const avatarHtml = getAvatarHTML(user, true);
-                        const adminBadge = isAdminMode ? `<div class="absolute top-2 right-2 text-[#FF8E9E]"><i class="fa-solid fa-pen-to-square text-xs"></i></div>` : '';
-
-                        upboCards += `
-                            <div onclick="clickUpboCard('${user.id}')" class="bg-white dark:bg-[#1C1516] border-2 border-brand rounded-2xl p-4 flex flex-col items-center justify-center cursor-pointer hover:bg-brand-light/50 hover:translate-y-[-2px] transition-all shadow-sm relative">
-                                ${adminBadge}
-                                ${avatarHtml}
-                                <div class="text-brand-dark dark:text-pink-100 font-bold text-xs truncate w-full text-center mb-1.5">${user.nickname}</div>
-                                <div class="bg-[#FF8E9E] text-white text-[9px] font-bold px-2 py-0.5 rounded-md">리액션 ${totalItems}개</div>
+                    if (upboList.length === 0) {
+                        upboCards = `
+                            <div class="col-span-full p-8 text-center text-gray-400 font-bold text-xs sm:text-sm bg-[#FFF0F2]/30 rounded-[2rem] border border-dashed border-brand/40">
+                                ⛓️ 등록된 죄수단 업보가 없습니다잇! 프리패스 ✨
                             </div>
                         `;
-                    });
+                    } else {
+                        upboList.forEach(user => {
+                            const totalItems = (user.items || []).reduce((sum, item) => sum + item.count, 0);
+                            const avatarHtml = getAvatarHTML(user, true);
+                            const adminBadge = isAdminMode ? `<div class="absolute top-2 right-2 text-[#FF8E9E]"><i class="fa-solid fa-pen-to-square text-xs"></i></div>` : '';
+
+                            upboCards += `
+                                <div onclick="clickUpboCard('${user.id}')" class="bg-white dark:bg-[#1C1516] border-2 border-brand rounded-2xl p-4 flex flex-col items-center justify-center cursor-pointer hover:bg-brand-light/50 hover:translate-y-[-2px] transition-all shadow-sm relative">
+                                    ${adminBadge}
+                                    ${avatarHtml}
+                                    <div class="text-brand-dark dark:text-pink-100 font-bold text-xs truncate w-full text-center mb-1.5">${user.nickname}</div>
+                                    <div class="bg-[#FF8E9E] text-white text-[9px] font-bold px-2 py-0.5 rounded-md">리액션 ${totalItems}개</div>
+                                </div>
+                            `;
+                        });
+                    }
 
                     sectionHtml = `
                         <div class="bg-white dark:bg-brand-darkCardBg border-4 border-brand rounded-3xl p-6 box-shadow-lovely relative transition-colors duration-300">
@@ -1074,41 +1100,49 @@
                     `;
                 } else if (section.id === 'sigballoon') {
                     let sigRows = '';
-                    const sigs = globalSigballoonData.length > 0 ? globalSigballoonData : defaultSigballoonData;
+                    const sigs = globalSigballoonData;
 
-                    sigs.forEach((sig, index) => {
-                        const deleteBtn = isAdminMode ? `
-                            <button onclick="deleteSigballoon(${index})" class="text-gray-400 hover:text-red-500 transition-colors p-2.5 hover:scale-110" title="시그풍 삭제">
-                                <i class="fa-solid fa-trash-can text-sm"></i>
-                            </button>
-                        ` : '';
-
-                        const imageContainer = sig.img 
-                            ? `<div class="w-[293px] h-[164px] max-w-full rounded-2xl overflow-hidden bg-transparent flex items-center justify-center flex-shrink-0 border-2 border-brand/20 relative">
-                                 <img src="${sig.img}" class="w-full h-full object-contain" alt="${sig.name}" onerror="this.src='https://placehold.co/293x164/FFF0F2/FF8E9E?text=WouJURY+Sig+💖'">
-                               </div>`
-                            : `<div class="w-[293px] h-[164px] max-w-full rounded-2xl bg-[#FFF0F2] dark:bg-[#1C1516]/50 flex items-center justify-center flex-shrink-0 border border-dashed border-brand/40">
-                                 <span class="text-xs text-gray-400 font-bold">이미지 없음 🍭</span>
-                               </div>`;
-
-                        sigRows += `
-                            <div class="flex flex-col md:flex-row items-center p-4 bg-[#FFF0F2]/50 dark:bg-brand-darkCardBg rounded-[2rem] border-2 border-brand/30 gap-5 hover:scale-[1.01] transition-transform">
-                                ${imageContainer}
-                                <div class="flex-grow min-w-0 text-center md:text-left">
-                                    <div class="flex flex-col md:flex-row items-center gap-2 mb-2">
-                                        <span class="inline-block bg-[#FF8E9E] text-white dark:bg-brand dark:text-brand-dark font-mono font-bold text-xs px-3 py-1 rounded-xl border border-brand">
-                                            🎈 ${sig.count}
-                                        </span>
-                                        <h4 class="text-sm sm:text-base font-bold text-brand-dark dark:text-white truncate">${sig.name}</h4>
-                                    </div>
-                                    <p class="text-xs text-gray-500 dark:text-pink-300 mt-1 leading-relaxed font-semibold">${sig.desc}</p>
-                                </div>
-                                <div class="flex items-center gap-2 flex-shrink-0 self-end md:self-center">
-                                    ${deleteBtn}
-                                </div>
+                    if (sigs.length === 0) {
+                        sigRows = `
+                            <div class="p-8 text-center text-gray-400 font-bold text-xs sm:text-sm bg-[#FFF0F2]/30 rounded-[2rem] border border-dashed border-brand/40">
+                                🍬 등록된 시그니처 풍선 미션이 없습니다잇!
                             </div>
                         `;
-                    });
+                    } else {
+                        sigs.forEach((sig, index) => {
+                            const deleteBtn = isAdminMode ? `
+                                <button onclick="deleteSigballoon(${index})" class="text-gray-400 hover:text-red-500 transition-colors p-2.5 hover:scale-110" title="시그풍 삭제">
+                                    <i class="fa-solid fa-trash-can text-sm"></i>
+                                </button>
+                            ` : '';
+
+                            const imageContainer = sig.img 
+                                ? `<div class="w-[293px] h-[164px] max-w-full rounded-2xl overflow-hidden bg-transparent flex items-center justify-center flex-shrink-0 border-2 border-brand/20 relative">
+                                     <img src="${sig.img}" class="w-full h-full object-contain" alt="${sig.name}" onerror="this.src='https://placehold.co/293x164/FFF0F2/FF8E9E?text=WouJURY+Sig+💖'">
+                                   </div>`
+                                : `<div class="w-[293px] h-[164px] max-w-full rounded-2xl bg-[#FFF0F2] dark:bg-[#1C1516]/50 flex items-center justify-center flex-shrink-0 border border-dashed border-brand/40">
+                                     <span class="text-xs text-gray-400 font-bold">이미지 없음 🍭</span>
+                                   </div>`;
+
+                            sigRows += `
+                                <div class="flex flex-col md:flex-row items-center p-4 bg-[#FFF0F2]/50 dark:bg-brand-darkCardBg rounded-[2rem] border-2 border-brand/30 gap-5 hover:scale-[1.01] transition-transform">
+                                    ${imageContainer}
+                                    <div class="flex-grow min-w-0 text-center md:text-left">
+                                        <div class="flex flex-col md:flex-row items-center gap-2 mb-2">
+                                            <span class="inline-block bg-[#FF8E9E] text-white dark:bg-brand dark:text-brand-dark font-mono font-bold text-xs px-3 py-1 rounded-xl border border-brand">
+                                                🎈 ${sig.count}
+                                            </span>
+                                            <h4 class="text-sm sm:text-base font-bold text-brand-dark dark:text-white truncate">${sig.name}</h4>
+                                        </div>
+                                        <p class="text-xs text-gray-500 dark:text-pink-300 mt-1 leading-relaxed font-semibold">${sig.desc}</p>
+                                    </div>
+                                    <div class="flex items-center gap-2 flex-shrink-0 self-end md:self-center">
+                                        ${deleteBtn}
+                                    </div>
+                                </div>
+                            `;
+                        });
+                    }
 
                     sectionHtml = `
                         <div class="bg-white dark:bg-brand-darkCardBg border-4 border-brand rounded-3xl p-6 box-shadow-lovely relative transition-colors duration-300">
@@ -1198,7 +1232,7 @@
         }
 
         function filterUpboList(keyword) {
-            const upboList = globalUpboData.length > 0 ? globalUpboData : defaultUpboData;
+            const upboList = globalUpboData;
             const filtered = upboList.filter(user => 
                 user.nickname.toLowerCase().includes(keyword.toLowerCase()) || 
                 user.id.toLowerCase().includes(keyword.toLowerCase())
@@ -1500,7 +1534,7 @@
 
         // 업보 보드판 클릭 처리
         function clickUpboCard(userId) {
-            const upboList = globalUpboData.length > 0 ? globalUpboData : defaultUpboData;
+            const upboList = globalUpboData;
             const target = upboList.find(u => u.id === userId);
             if (!target) return;
 
@@ -1728,7 +1762,12 @@
             if (!list) return;
             list.innerHTML = '';
 
-            const notices = globalNoticeData.length > 0 ? globalNoticeData : defaultNoticeData;
+            const notices = globalNoticeData;
+
+            if (notices.length === 0) {
+                list.innerHTML = `<div class="text-center text-gray-400 py-6 font-bold text-xs">등록된 공지사항이 없습니다.</div>`;
+                return;
+            }
 
             notices.forEach((notice, index) => {
                 list.innerHTML += `
@@ -1773,12 +1812,14 @@
             contentInput.value = '';
             linkInput.value = '';
             renderNoticeEditList();
+            renderEverything();
         }
 
         function deleteNotice(index) {
             globalNoticeData.splice(index, 1);
             updateFirestore('notice', globalNoticeData);
             renderNoticeEditList();
+            renderEverything();
         }
 
         function openScheduleEditModal() {
@@ -1897,7 +1938,12 @@
             if (!list) return;
             list.innerHTML = '';
 
-            const ddays = globalDdaysData.length > 0 ? globalDdaysData : defaultDdaysData;
+            const ddays = globalDdaysData;
+
+            if (ddays.length === 0) {
+                list.innerHTML = `<div class="text-center text-gray-400 py-6 font-bold text-xs">등록된 기념일이 없습니다.</div>`;
+                return;
+            }
 
             ddays.forEach((dday, index) => {
                 list.innerHTML += `
@@ -1916,21 +1962,21 @@
         }
 
         function addDdayRow() {
-            const ddays = globalDdaysData.length > 0 ? globalDdaysData : defaultDdaysData;
+            const ddays = globalDdaysData;
             ddays.push({ title: "새로운 기념일", type: "dday", date: "2026-07-26" });
             globalDdaysData = ddays;
             renderDdayEditList();
         }
 
         function deleteDdayRow(index) {
-            const ddays = globalDdaysData.length > 0 ? globalDdaysData : defaultDdaysData;
+            const ddays = globalDdaysData;
             ddays.splice(index, 1);
             globalDdaysData = ddays;
             renderDdayEditList();
         }
 
         function saveDdayChanges() {
-            const ddays = globalDdaysData.length > 0 ? globalDdaysData : defaultDdaysData;
+            const ddays = globalDdaysData;
             const updated = [];
 
             ddays.forEach((d, index) => {
@@ -1992,3 +2038,5 @@
     </script>
 </body>
 </html>
+```
+eof
