@@ -511,21 +511,25 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { initializeFirestore } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // 파이어베이스 구성 설정
+        // 새로운 파이어베이스 구성 설정 반영 (woujury-db)
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'jury-profile-app';
         const firebaseConfig = {
-            apiKey: "AIzaSyD_pxh2yQKzrJGM5rEoFQyms0_s4AAJjw8",
-            authDomain: "jury-profile-db.firebaseapp.com",
-            projectId: "jury-profile-db",
-            storageBucket: "jury-profile-db.firebasestorage.app",
-            messagingSenderId: "666470131431",
-            appId: "1:666470131431:web:577cd240c4df25cfd92442"
+            apiKey: "AIzaSyBDozqkocbmvTEuzCbtgFasu4ONPHRDaKI",
+            authDomain: "woujury-db.firebaseapp.com",
+            projectId: "woujury-db",
+            storageBucket: "woujury-db.firebasestorage.app",
+            messagingSenderId: "75007509927",
+            appId: "1:75007509927:web:c5dd5596ad247f60952282"
         };
 
         const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+        
+        // 가상 미리보기(iFrame) 환경에서의 웹소켓 차단을 우회하기 위해 Long Polling 강제 활성화 옵션 적용
+        const db = initializeFirestore(app, {
+            experimentalForceLongPolling: true
+        });
         const auth = getAuth(app);
 
         // 기본 프로필 구동 데이터
