@@ -12,8 +12,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Gowun Batang, Gaegu, Single Day (더욱 러블리하고 둥글둥글한 폰트 적용) -->
-    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gaegu:wght@400;700&family=Single+Day&family=Noto+Serif+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Gowun Batang, Gaegu, Noto Serif KR -->
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gaegu:wght@400;700&family=Noto+Serif+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -23,18 +23,16 @@
                     fontFamily: {
                         sans: ['Gowun Batang', 'Noto Serif KR', 'serif'],
                         cute: ['Gaegu', 'sans-serif'],
-                        lovely: ['Single Day', 'sans-serif'],
                     },
                     colors: {
                         brand: {
-                            light: '#FFF0F2',       // 연한 딸기우유 빛 바탕 보조
-                            DEFAULT: '#FFC2CD',     // 메인 스윗 핑크
-                            accent: '#FF6B8B',      // 러블리 로즈 핑크 (포인트)
-                            dark: '#2E1115',        // 깊은 초콜릿 와인빛 다크 테마 메인
-                            accentPurple: '#BDB2FF', // 러블리 파스텔 라벤더
-                            accentMint: '#98EECC',   // 상큼 파스텔 민트
-                            cardBg: '#FFF5F6',       // 메인 카드 배경
-                            darkCardBg: '#231416'    // 다크 모드 카드 배경
+                            light: '#FFF0F2', // 초특급 러블리 핑크
+                            DEFAULT: '#FFCCD3', // 메인 사랑스러운 연분홍
+                            dark: '#2D1E20',  // 깊고 따스한 다크 코코아 브라운
+                            accentBlue: '#4A90E2', // 러블리 스카이 블루
+                            accentGreen: '#66BB6A', // 싱그러운 민트그린
+                            cardBg: '#FFF5F6', // 러블리 카드 배경
+                            darkCardBg: '#2D1F21' // 다크 로즈 카드 배경
                         }
                     }
                 }
@@ -45,41 +43,31 @@
     <style>
         html { scroll-behavior: smooth; }
         
-        /* 주리만의 로맨틱 파스텔 스윗 핑크 스크롤바 */
+        /* 로맨틱 파스텔 핑크 스크롤바 */
         ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #FFF0F2; }
-        .dark ::-webkit-scrollbar-track { background: #2E1115; }
-        ::-webkit-scrollbar-thumb { background: #FF9EAF; border-radius: 9999px; border: 3px solid #FFF0F2; }
-        .dark ::-webkit-scrollbar-thumb { background: #FF6B8B; border: 3px solid #2E1115; }
+        ::-webkit-scrollbar-track { background: #FFF5F6; }
+        .dark ::-webkit-scrollbar-track { background: #1C1516; }
+        ::-webkit-scrollbar-thumb { background: #FFCCD3; border-radius: 9999px; border: 3px solid #FFF5F6; }
+        .dark ::-webkit-scrollbar-thumb { background: #FFCCD3; border: 3px solid #1C1516; }
         
         body {
             font-family: 'Gowun Batang', 'Noto Serif KR', serif;
         }
 
-        /* 퐁실퐁실 러블리 하트 바운스 애니메이션 */
+        /* 퐁실퐁실 하트 진동 애니메이션 */
         @keyframes lovelyHeart {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(255, 107, 139, 0.6)); }
-            50% { transform: scale(1.18); filter: drop-shadow(0 0 12px rgba(255, 107, 139, 0.9)); }
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(255,204,211,0.8)); }
+            50% { transform: scale(1.15); filter: drop-shadow(0 0 10px rgba(255,100,120,0.6)); }
         }
-        .lovely-heart {
-            animation: lovelyHeart 1.4s infinite ease-in-out;
-        }
-
-        /* 둥실둥실 구름 부유 애니메이션 */
-        @keyframes floatCute {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(1deg); }
-        }
-        .float-lovely {
-            animation: floatCute 3s infinite ease-in-out;
+        .lovely-heart-anim {
+            animation: lovelyHeart 1.5s infinite ease-in-out;
         }
 
-        /* 벚꽃 및 미니 하트 입자 애니메이션 */
-        .cherry-particle {
+        /* 흩날리는 벚꽃가루/별빛 입자 */
+        .blossom-particle {
             position: absolute;
             pointer-events: none;
             animation: blossomFall linear forwards;
-            z-index: 1;
         }
         @keyframes blossomFall {
             0% {
@@ -91,75 +79,74 @@
                 opacity: 0;
             }
         }
-
-        /* 사랑스러운 입체 하트 섀도우 효과 */
+        
+        /* 러블리 글로잉 입체 섀도우 효과 */
         .box-shadow-lovely {
-            box-shadow: 0 10px 25px -5px rgba(255, 107, 139, 0.2), 0 8px 10px -6px rgba(255, 107, 139, 0.15);
+            box-shadow: 0 10px 25px -5px rgba(255, 182, 193, 0.4), 0 8px 10px -6px rgba(255, 182, 193, 0.3);
         }
         .dark .box-shadow-lovely {
-            box-shadow: 0 10px 25px -5px rgba(255, 107, 139, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
         }
-        
-        /* 카드 마우스 호버 입체 효과 */
-        .hover-card-effect {
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+        /* 부드러운 스윗 테두리 */
+        .lovely-border {
+            border: 3px solid #FFCCD3;
         }
-        .hover-card-effect:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px -5px rgba(255, 107, 139, 0.35);
+        .dark .lovely-border {
+            border: 3px solid #FF8E9E;
         }
     </style>
 </head>
-<body class="bg-gradient-to-b from-[#FFF5F6] via-[#FFFDFD] to-[#FFF0F2] dark:from-[#1A0E10] dark:via-[#130A0B] dark:to-[#1C0F11] text-brand-dark dark:text-pink-100 font-sans text-base antialiased min-h-screen flex flex-col transition-colors duration-300 relative overflow-x-hidden">
+<body class="bg-[#FFF9FA] dark:bg-[#1C1415] text-[#2C1D20] dark:text-pink-100 font-sans text-base antialiased min-h-screen flex flex-col transition-colors duration-300 relative overflow-x-hidden">
 
-    <!-- 주리의 뽀용한 분홍빛 벚꽃 & 미니 하트 배경 레이어 -->
-    <div class="absolute inset-0 pointer-events-none overflow-hidden z-0 opacity-90" id="cherry-bg"></div>
+    <!-- 벚꽃 입자 배경 레이어 -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden z-0 opacity-90" id="blossom-bg"></div>
 
     <!-- 네비게이션 헤더 바 -->
-    <header class="bg-white/80 dark:bg-brand-dark/80 backdrop-blur-md sticky top-0 z-50 transition-all duration-300 border-b-4 border-brand-accent/50 dark:border-brand-accent shadow-sm">
+    <header class="bg-white/90 dark:bg-brand-dark/95 backdrop-blur-md sticky top-0 z-50 transition-all duration-300 border-b-4 border-brand">
         <div class="max-w-4xl mx-auto px-4 sm:px-6">
             <div class="flex justify-between items-center h-16">
                 <!-- 로고 & 타이틀 -->
                 <a href="#" class="flex items-center gap-2 group">
-                    <span class="lovely-heart text-2xl">💖</span>
-                    <span class="text-brand-accent dark:text-brand font-lovely font-bold text-2xl tracking-wider pt-0.5">우주리 WouJURY</span>
-                    <span class="text-[11px] bg-brand-accent text-white font-bold px-2.5 py-0.5 rounded-full font-cute tracking-tight animate-pulse shadow-md">딜탱맛집 🍀</span>
+                    <span class="lovely-heart-anim text-2xl">💖</span>
+                    <span class="text-brand-dark dark:text-white font-bold text-xl tracking-wider pt-0.5">우주리 WouJURY</span>
+                    <span class="text-xs bg-[#FF8E9E] text-white font-semibold px-2.5 py-0.5 rounded-full font-cute tracking-tighter">딜탱맛집 🍀</span>
                 </a>
                 
                 <!-- 상단 데스크탑 네비게이션 -->
                 <nav class="hidden md:flex space-x-3 items-center font-bold text-sm">
-                    <a href="#profile-hero" class="text-brand-dark dark:text-pink-200 hover:text-brand-accent dark:hover:text-brand px-3.5 py-1.5 rounded-2xl hover:bg-brand-light/60 dark:hover:bg-brand-dark/50 transition-all">소개</a>
-                    <a href="#dynamic-sections" class="text-brand-dark dark:text-pink-200 hover:text-brand-accent dark:hover:text-brand px-3.5 py-1.5 rounded-2xl hover:bg-brand-light/60 dark:hover:bg-brand-dark/50 transition-all">둘러보기</a>
+                    <a href="#profile-hero" class="text-brand-dark dark:text-pink-200 hover:text-[#FF8E9E] dark:hover:text-brand px-3 py-1.5 rounded-xl transition-all">소개</a>
+                    <a href="#dynamic-sections" class="text-brand-dark dark:text-pink-200 hover:text-[#FF8E9E] dark:hover:text-brand px-3 py-1.5 rounded-xl transition-all">둘러보기</a>
                     
                     <!-- 테마 변경 버튼 -->
-                    <button id="theme-toggle" class="text-brand-accent dark:text-brand p-2 rounded-2xl hover:bg-brand-light dark:hover:bg-zinc-800 transition-colors" title="다크 모드 변경">
+                    <button id="theme-toggle" class="text-brand-accentBlue dark:text-brand p-2 rounded-xl hover:bg-brand/20 transition-colors" title="테마 전환">
                         <i class="fa-solid fa-moon text-lg w-5 h-5 flex items-center justify-center"></i>
                     </button>
-                    <!-- 비밀 관리자 센터 로그인 -->
-                    <button onclick="openAdminLoginModal()" class="bg-gradient-to-r from-brand-accent to-[#FF8FA3] text-white px-4 py-2 rounded-2xl text-xs hover:scale-105 active:scale-95 transition-all font-bold shadow-md shadow-brand-accent/20" title="관리 모드 인증">
-                        <i class="fa-solid fa-wand-magic-sparkles mr-1.5 animate-spin"></i>관리자인증
+                    <!-- 관리자 센터 로그인 -->
+                    <button onclick="openAdminLoginModal()" class="bg-[#FF8E9E] hover:bg-[#ff7386] text-white px-4 py-1.5 rounded-xl text-xs hover:scale-105 active:scale-95 transition-all font-semibold shadow-sm" title="관리 모드 인증">
+                        <i class="fa-solid fa-lock mr-1.5"></i>관리자인증
                     </button>
                 </nav>
 
                 <!-- 모바일 제어 버튼 -->
                 <div class="md:hidden flex items-center gap-1">
-                    <button id="mobile-theme-toggle" class="text-brand-accent dark:text-brand p-2.5 rounded-2xl transition-colors">
+                    <button id="mobile-theme-toggle" class="text-brand-accentBlue dark:text-brand p-2.5 rounded-xl transition-colors">
                         <i class="fa-solid fa-moon text-lg flex items-center justify-center"></i>
                     </button>
-                    <button onclick="openAdminLoginModal()" class="text-brand-accent dark:text-brand p-2.5 rounded-2xl" title="관리 인증">
+                    <button onclick="openAdminLoginModal()" class="text-[#FF8E9E] dark:text-brand p-2.5 rounded-xl" title="관리 인증">
                         <i class="fa-solid fa-lock text-sm"></i>
                     </button>
-                    <button id="mobile-menu-btn" class="text-brand-dark dark:text-pink-200 p-2.5 rounded-2xl focus:outline-none">
+                    <button id="mobile-menu-btn" class="text-brand-dark dark:text-pink-200 p-2.5 rounded-xl focus:outline-none">
                         <i class="fa-solid fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
         </div>
         <!-- 모바일 가이드 네비 바 -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white/95 dark:bg-brand-dark/95 border-t-2 border-brand-accent/30 dark:border-brand-accent">
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 dark:bg-brand-dark/95 border-t-2 border-brand">
             <div class="px-4 py-3 space-y-1 font-bold text-sm">
-                <a href="#profile-hero" class="block text-brand-dark dark:text-pink-200 px-4 py-2.5 rounded-2xl hover:bg-brand-light">소개</a>
-                <a href="#dynamic-sections" class="block text-brand-dark dark:text-pink-200 px-4 py-2.5 rounded-2xl hover:bg-brand-light">포트폴리오 정보</a>
+                <a href="#profile-hero" class="block text-brand-dark dark:text-pink-200 px-4 py-2.5 rounded-xl hover:bg-brand/10">소개</a>
+                <a href="#dynamic-sections" class="block text-brand-dark dark:text-pink-200 px-4 py-2.5 rounded-xl hover:bg-brand/10">포트폴리오 정보</a>
             </div>
         </div>
     </header>
@@ -169,28 +156,31 @@
 
         <!-- 프로필 배너 & 주 우주리 메인 대시보드 -->
         <section id="profile-hero" class="scroll-mt-20">
-            <div class="bg-white/80 dark:bg-brand-darkCardBg border-4 border-brand-accent/30 dark:border-brand rounded-[2.5rem] box-shadow-lovely overflow-hidden transition-all duration-300">
+            <div class="bg-white dark:bg-brand-darkCardBg border-4 border-brand rounded-[2.5rem] box-shadow-lovely overflow-hidden transition-all duration-300 relative">
                 
-                <!-- 상단 아트 배너 -->
-                <div class="h-44 sm:h-64 w-full relative overflow-hidden bg-[#FFD6DC]">
+                <!-- 상단 아트 배너 및 사진 업로드 트리거 -->
+                <div class="h-44 sm:h-64 w-full relative overflow-hidden bg-gradient-to-r from-brand-accentBlue/20 via-brand to-brand-accentGreen/20 group">
                     <img id="profile-banner-img" src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=1200&auto=format&fit=crop" 
-                         class="w-full h-full object-cover absolute inset-0 opacity-80" alt="우주리 배너">
+                         class="w-full h-full object-cover absolute inset-0 opacity-70 transition-opacity group-hover:opacity-60" alt="우주리 배너">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                     
-                    <!-- 관리자 모드 배너 수정 버튼 -->
-                    <button id="edit-banner-btn" onclick="openBannerEditModal()" class="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white text-xs px-3 py-1.5 rounded-xl border border-white/20 hidden transition-all z-20">
-                        <i class="fa-solid fa-camera mr-1"></i> 배너 사진 수정
-                    </button>
+                    <!-- 관리자 모드 전용 배너 수정 오버레이 -->
+                    <div id="banner-admin-overlay" class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 pointer-events-none transition-opacity z-20">
+                        <button onclick="triggerBannerChange()" class="px-5 py-3 bg-white/95 text-brand-dark font-bold text-xs rounded-2xl shadow-lg border-2 border-[#FF8E9E] flex items-center gap-2 hover:scale-105 transition-transform">
+                            <i class="fa-solid fa-camera text-[#FF8E9E] text-base animate-pulse"></i>
+                            <span>우주리 배너 사진 변경 🌸</span>
+                        </button>
+                    </div>
 
                     <div class="absolute bottom-4 right-6 text-white text-right drop-shadow-md hidden sm:block">
-                        <p class="font-lovely text-2xl animate-pulse">"너의 마음에 온전히 자리할 수 있게 더욱 사랑스러운 사람이 될게! ♡"</p>
+                        <p class="font-cute text-2xl">"너의 마음에 온전히 자리할 수 있게 더욱 사랑스러운 사람이 될게! ♡"</p>
                     </div>
                 </div>
                 
                 <div class="px-6 sm:px-8 pb-8 flex flex-col sm:flex-row relative">
                     <!-- 우주리 대표 프로필 아바타 -->
                     <div class="-mt-20 sm:-mt-24 mb-4 sm:mb-0 sm:mr-6 flex-shrink-0 flex justify-center sm:block relative z-10">
-                        <img class="h-32 w-32 sm:h-40 sm:w-40 rounded-full border-4 border-[#FF6B8B] shadow-2xl object-cover bg-brand-light hover:rotate-6 transition-transform duration-300 float-lovely" 
+                        <img class="h-32 w-32 sm:h-40 sm:w-40 rounded-full border-4 border-brand shadow-lg object-cover bg-[#FFF5F6] hover:rotate-3 transition-transform duration-300" 
                              src="https://stimg.afreecatv.com/LOGO/wo/woujury/woujury.jpg" 
                              onerror="this.src='https://placehold.co/400x400/FEDBE0/004EBC?text=WouJURY+💖'" 
                              alt="우주리 아바타">
@@ -201,56 +191,51 @@
                         <div>
                             <!-- 키워드 배지 리스트 -->
                             <div class="flex flex-wrap justify-center sm:justify-start gap-1.5 mb-3">
-                                <span class="bg-gradient-to-r from-brand-accent to-[#FF8FA3] text-white px-3 py-1 rounded-full text-xs font-bold tracking-wide shadow-sm">
-                                    <i class="fa-solid fa-heart mr-1.5 animate-pulse"></i> 딜탱맛집 여자친구
+                                <span class="bg-[#FF8E9E] text-white px-3 py-1 rounded-full text-xs font-semibold tracking-wide shadow-sm">
+                                    <i class="fa-solid fa-shield-halved mr-1"></i> 딜탱맛집 여자친구
                                 </span>
-                                <span class="bg-[#FFF0F2] dark:bg-brand-dark text-brand-accent px-3 py-1 rounded-full text-xs font-bold tracking-wide border border-[#FFD6DC]">
-                                    <i class="fa-solid fa-star-twinkle mr-1.5"></i> 청순큐티섹시
+                                <span class="bg-[#FFCCD3] text-[#2C1D20] px-3 py-1 rounded-full text-xs font-bold tracking-wide shadow-sm">
+                                    <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> 청순큐티섹시
                                 </span>
-                                <span class="bg-brand-accentPurple/20 text-indigo-700 dark:text-purple-200 px-3 py-1 rounded-full text-xs font-bold tracking-wide">
-                                    <i class="fa-solid fa-microphone-lines mr-1.5"></i> 리얼 스트리머
+                                <span class="bg-brand-accentGreen text-white px-3 py-1 rounded-full text-xs font-semibold tracking-wide shadow-sm">
+                                    <i class="fa-solid fa-microphone mr-1"></i> 리얼 스트리머
                                 </span>
                             </div>
 
-                            <h1 class="text-3xl sm:text-4xl font-lovely font-bold text-brand-dark dark:text-white mb-3 flex items-baseline justify-center sm:justify-start gap-2.5">
+                            <h1 class="text-3xl sm:text-4xl font-bold text-brand-dark dark:text-white mb-3 flex items-baseline justify-center sm:justify-start gap-2.5">
                                 우주리
-                                <span class="text-base text-brand-accent dark:text-brand font-mono font-semibold">WouJURY</span>
+                                <span class="text-base text-[#FF8E9E] dark:text-brand font-mono font-semibold">WouJURY</span>
                             </h1>
                             
                             <!-- 핵심 신상 명세 표기 -->
                             <div class="flex flex-wrap justify-center sm:justify-start gap-1.5 mb-5 text-xs font-bold text-gray-800 dark:text-pink-100">
-                                <span class="px-2.5 py-1 bg-brand-light dark:bg-brand-darkCardBg rounded-xl border border-brand/40">🎂 생일: 1월 21일</span>
-                                <span class="px-2.5 py-1 bg-brand-light dark:bg-brand-darkCardBg rounded-xl border border-brand/40">🌱 데뷔: 2023.07.26</span>
-                                <span class="px-2.5 py-1 bg-brand-light dark:bg-brand-darkCardBg rounded-xl border border-brand/40">✨ MBTI: eiNFP</span>
-                                <span class="px-2.5 py-1 bg-brand-accent/15 dark:bg-brand-accent/30 text-brand-accent dark:text-pink-200 rounded-xl">⛓️ 팬닉: 죄수단</span>
+                                <span class="px-2.5 py-1 bg-[#FFF0F2] dark:bg-brand-darkCardBg rounded-xl border border-[#FFCCD3]/40">🎂 생일: 1월 21일</span>
+                                <span class="px-2.5 py-1 bg-[#FFF0F2] dark:bg-brand-darkCardBg rounded-xl border border-[#FFCCD3]/40">🌱 데뷔: 2023.07.26</span>
+                                <span class="px-2.5 py-1 bg-[#FFF0F2] dark:bg-brand-darkCardBg rounded-xl border border-[#FFCCD3]/40">✨ MBTI: eiNFP</span>
+                                <span class="px-2.5 py-1 bg-[#FFCCD3]/30 text-brand-dark dark:text-pink-200 rounded-xl">⛓️ 팬닉: 죄수단</span>
                             </div>
                         </div>
 
                         <!-- 5대 프로필 핵심 링크 소셜 연동 버튼그룹 -->
                         <div class="flex flex-wrap justify-center sm:justify-start gap-2.5">
-                            <!-- SOOP 방송국 -->
                             <a id="link-soop" href="https://www.sooplive.com/station/woujury" target="_blank" 
-                               class="px-4 py-2 rounded-2xl bg-[#2D8CFF] hover:bg-[#1a7beb] text-white flex items-center justify-center gap-1.5 text-xs font-bold shadow-md hover:scale-105 active:scale-95 transition-all" title="숲 방송국 🐰">
+                               class="px-4 py-2.5 rounded-2xl bg-[#2D8CFF] hover:bg-[#1a7beb] text-white flex items-center justify-center gap-1.5 text-xs font-bold shadow-sm hover:scale-105 active:scale-95 transition-all" title="숲 방송국 🐰">
                                 <i class="fa-solid fa-tv"></i> 숲 방송국
                             </a>
-                            <!-- 팬심M -->
                             <a id="link-fancimm" href="https://fancimm.com/profile/855529" target="_blank" 
-                               class="px-4 py-2 rounded-2xl bg-[#E23F82] hover:bg-[#c92f6d] text-white flex items-center justify-center gap-1.5 text-xs font-bold shadow-md hover:scale-105 active:scale-95 transition-all" title="비방 비공개소통 💖">
-                                <i class="fa-solid fa-comments text-xs"></i> 팬심M
+                               class="px-4 py-2.5 rounded-2xl bg-[#E23F82] hover:bg-[#c92f6d] text-white flex items-center justify-center gap-1.5 text-xs font-bold shadow-sm hover:scale-105 active:scale-95 transition-all" title="비방 비공개소통 💖">
+                                <i class="fa-solid fa-comments"></i> 팬심M
                             </a>
-                            <!-- 유튜브 -->
                             <a id="link-youtube" href="https://youtube.com/@woujury?si=iWKLJKfswbNJug6i" target="_blank" 
-                               class="px-4 py-2 rounded-2xl bg-[#FF0000] hover:bg-[#d60000] text-white flex items-center justify-center gap-1.5 text-xs font-bold shadow-md hover:scale-105 active:scale-95 transition-all" title="유튜브">
+                               class="px-4 py-2.5 rounded-2xl bg-[#FF0000] hover:bg-[#d60000] text-white flex items-center justify-center gap-1.5 text-xs font-bold shadow-sm hover:scale-105 active:scale-95 transition-all" title="유튜브">
                                 <i class="fa-brands fa-youtube text-sm"></i> 유튜브
                             </a>
-                            <!-- 네이버 팬카페 -->
                             <a id="link-cafe" href="https://m.cafe.naver.com/woujury" target="_blank" 
-                               class="px-4 py-2 rounded-2xl bg-[#03CF5D] hover:bg-[#02ab4c] text-white flex items-center justify-center gap-1.5 text-xs font-bold shadow-md hover:scale-105 active:scale-95 transition-all" title="네이버 팬카페">
+                               class="px-4 py-2.5 rounded-2xl bg-[#03CF5D] hover:bg-[#02ab4c] text-white flex items-center justify-center gap-1.5 text-xs font-bold shadow-sm hover:scale-105 active:scale-95 transition-all" title="네이버 팬카페">
                                 <i class="fa-solid fa-mug-hot"></i> 공식 팬카페
                             </a>
-                            <!-- 팬심 선물 -->
                             <a id="link-gift" href="https://fancim.me/celeb/profile.aspx?url=715019" target="_blank" 
-                               class="px-4 py-2 rounded-2xl bg-[#FF8FA3] hover:bg-[#ff7b91] text-white flex items-center justify-center gap-1.5 text-xs font-bold shadow-md hover:scale-105 active:scale-95 transition-all" title="선물 발송">
+                               class="px-4 py-2.5 rounded-2xl bg-[#004EBC] hover:bg-[#00388a] text-white flex items-center justify-center gap-1.5 text-xs font-bold shadow-sm hover:scale-105 active:scale-95 transition-all" title="선물 발송">
                                 <i class="fa-solid fa-gift"></i> 팬심선물
                             </a>
                         </div>
@@ -260,260 +245,289 @@
         </section>
 
         <!-- 관리자 모드 활성화 시 헤드라인에 노출될 안내 보드 -->
-        <div id="admin-indicator" class="hidden bg-gradient-to-r from-[#FFF5F6] to-[#FFF0F2] dark:from-[#3A1E22] dark:to-brand-dark p-4 rounded-3xl border-4 border-brand-accent/50 box-shadow-lovely flex justify-between items-center transition-all">
+        <div id="admin-indicator" class="hidden bg-white border-4 border-[#FF8E9E] p-4 rounded-[2rem] box-shadow-lovely flex justify-between items-center transition-all z-20 relative">
             <div class="flex items-center gap-2">
-                <span class="text-xl animate-bounce">🛠️</span>
+                <span class="text-2xl animate-bounce">🛠️</span>
                 <div>
-                    <h4 class="text-sm font-bold text-brand-accent">주리대장 관리인증 모드 작동 중</h4>
-                    <p class="text-[11px] text-gray-700 dark:text-pink-150">원하는 항목의 토글을 켜거나 끄고 순서를 커스텀하거나 내용을 변경할 수 있어요!</p>
+                    <h4 class="text-sm font-bold text-brand-dark">관리인증 모드 작동 중</h4>
+                    <p class="text-[11px] text-gray-500 font-semibold">원하는 항목의 토글을 켜거나 끄고 순서를 변경할 수 있습니다.</p>
                 </div>
             </div>
-            <button onclick="openSectionManagerModal()" class="px-4 py-2 bg-gradient-to-r from-brand-accent to-[#FF8FA3] text-white text-xs font-bold rounded-xl hover:scale-105 active:scale-95 transition-all">
-                <i class="fa-solid fa-list-check mr-1.5"></i>항목 추가/삭제/편집
+            <button onclick="openSectionManagerModal()" class="px-4 py-2 bg-[#FF8E9E] text-white text-xs font-bold rounded-xl hover:scale-105 active:scale-95 transition-all shadow-sm">
+                <i class="fa-solid fa-list-check mr-1.5"></i>항목 관리자 센터
             </button>
         </div>
 
-        <!-- 💡 동적 레이아웃 공간 (항목 가동 범위 시스템) -->
+        <!-- 동적 레이아웃 공간 -->
         <div id="dynamic-sections" class="space-y-8 min-h-[100px]">
-            <!-- 이 안에 사용자가 커스텀 설정한 순서대로 각 항목 섹션이 자바스크립트로 자동 마운트됩니다 -->
+            <!-- 자바스크립트로 자동 정렬되어 마운트됩니다 -->
         </div>
 
     </main>
 
     <!-- 하단 바 -->
-    <footer class="bg-brand-dark text-white py-12 text-center mt-auto border-t-4 border-brand-accent">
-        <p class="font-lovely text-3xl tracking-widest leading-relaxed text-[#FF8FA3] animate-pulse">
+    <footer class="bg-brand-dark text-white py-12 text-center mt-auto border-t-4 border-brand">
+        <p class="font-cute text-3xl tracking-widest leading-relaxed text-brand">
             🌸 언제나 우주리와 함께해 줘서 꼬마오요, 죄수단 여러분! 🌸
         </p>
-        <div class="flex justify-center gap-4 text-xs font-bold mt-4 text-pink-300">
+        <div class="flex justify-center gap-4 text-xs font-bold mt-4 text-pink-200/50">
             <span>#딜탱맛집_여자친구</span>
             <span>#우주최강_주리</span>
             <span>#죄수단_프리패스</span>
         </div>
         <p class="text-[10px] text-zinc-500 font-mono mt-6 tracking-tighter uppercase">© 2026 WouJURY Live. All rights reserved.</p>
-        <p class="text-[10px] text-zinc-500 font-mono">edited by. 주리 사랑 죄수단 ⛓️</p>
+        <p class="text-[10px] text-zinc-500 font-mono">made by. 연주아</p>
     </footer>
 
-    <!-- 1. 관리인증 PIN 모달 (요청에 의거하여 비밀번호 안내 문구 완벽 삭제) -->
-    <div id="admin-login-modal" class="fixed inset-0 z-[110] flex items-center justify-center bg-black/70 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white dark:bg-brand-darkCardBg rounded-3xl shadow-2xl w-11/12 max-w-sm p-6 transform scale-95 transition-transform duration-300 border-4 border-brand-accent">
-            <h3 class="text-xl font-lovely font-bold text-brand-dark dark:text-white mb-2"><i class="fa-solid fa-key text-brand-accent mr-1"></i> 우주리 관리인증</h3>
-            <p class="text-xs text-gray-500 dark:text-pink-300 mb-4 font-semibold">관리 전용 패스워드를 인가해 주세요.</p>
-            <input type="password" id="admin-pin" class="w-full bg-brand-light dark:bg-black/40 border-2 border-[#FFC2CD] text-gray-950 dark:text-pink-100 rounded-xl p-3.5 mb-4 outline-none text-center tracking-widest font-bold text-xl" placeholder="••••••••">
-            <div class="flex justify-end gap-2 text-xs font-bold">
-                <button onclick="closeAdminLoginModal()" class="px-4 py-3 rounded-xl bg-gray-200 dark:bg-zinc-800 text-gray-700 dark:text-pink-200 hover:bg-gray-300 transition-colors">취소</button>
-                <button onclick="checkAdminPin()" class="px-5 py-3 rounded-xl bg-[#FF6B8B] text-white hover:bg-[#ff5277] transition-colors shadow-md">인증완료</button>
+    <!-- ==================== [자체 제작 러블리 알림 & 확인창 모달] ==================== -->
+    <div id="lovely-alert-modal" class="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white dark:bg-[#2A1F21] rounded-3xl p-6 max-w-sm w-11/12 border-4 border-brand text-center shadow-xl transform scale-95 transition-transform duration-300">
+            <div class="text-4xl mb-3">💖</div>
+            <h3 class="text-lg font-bold text-brand-dark dark:text-white mb-2" id="lovely-alert-title">알림</h3>
+            <p class="text-sm text-gray-600 dark:text-pink-200 mb-5 font-semibold leading-relaxed" id="lovely-alert-message"></p>
+            <button onclick="closeLovelyAlert()" class="w-full py-2.5 bg-[#FF8E9E] hover:bg-[#ff7386] text-white font-bold rounded-xl transition-all shadow-sm">확인</button>
+        </div>
+    </div>
+
+    <div id="lovely-confirm-modal" class="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white dark:bg-[#2A1F21] rounded-3xl p-6 max-w-sm w-11/12 border-4 border-brand text-center shadow-xl transform scale-95 transition-transform duration-300">
+            <div class="text-4xl mb-3">❓</div>
+            <h3 class="text-lg font-bold text-brand-dark dark:text-white mb-2" id="lovely-confirm-title">확인</h3>
+            <p class="text-sm text-gray-600 dark:text-pink-200 mb-5 font-semibold leading-relaxed" id="lovely-confirm-message"></p>
+            <div class="flex gap-3 font-bold text-sm">
+                <button id="lovely-confirm-cancel" class="flex-1 py-2.5 bg-gray-200 dark:bg-zinc-800 text-gray-700 dark:text-gray-300 rounded-xl transition-all">취소</button>
+                <button id="lovely-confirm-ok" class="flex-1 py-2.5 bg-[#FF8E9E] hover:bg-[#ff7386] text-white rounded-xl transition-all shadow-sm">확인</button>
             </div>
         </div>
     </div>
 
-    <!-- 2. 항목 관리자 (추가/삭제/토글/순서조정) 모달 -->
+    <!-- 1. 관리인증 PIN 모달 (비밀번호 가이드 문구 완벽 제거) -->
+    <div id="admin-login-modal" class="fixed inset-0 z-[110] flex items-center justify-center bg-black/70 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white dark:bg-brand-darkCardBg rounded-[2rem] shadow-2xl w-11/12 max-w-sm p-6 transform scale-95 transition-transform duration-300 border-4 border-brand">
+            <h3 class="text-xl font-bold text-brand-dark dark:text-white mb-2"><i class="fa-solid fa-key text-[#FF8E9E] mr-1.5"></i> 우주리 관리인증</h3>
+            <p class="text-xs text-gray-500 dark:text-pink-300 mb-4 font-semibold">관리 전용 패스워드를 인가해 주세요.</p>
+            <input type="password" id="admin-pin" class="w-full bg-[#FFF5F6] dark:bg-black/40 border-2 border-brand text-brand-dark dark:text-pink-150 rounded-xl p-3.5 mb-4 outline-none text-center tracking-widest font-bold text-xl" placeholder="••••••••">
+            <div class="flex justify-end gap-2 text-xs font-bold">
+                <button onclick="closeAdminLoginModal()" class="px-4 py-3 rounded-xl bg-gray-200 dark:bg-zinc-800 text-gray-700 dark:text-pink-200 hover:bg-gray-300 transition-colors">취소</button>
+                <button onclick="checkAdminPin()" class="px-4 py-3 rounded-xl bg-[#FF8E9E] text-white hover:bg-[#ff7386] transition-colors">인증완료</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. 항목 관리자 모달 -->
     <div id="section-manager-modal" class="fixed inset-0 z-[105] flex items-center justify-center bg-black/70 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white dark:bg-brand-darkCardBg rounded-3xl shadow-2xl w-11/12 max-w-md p-6 transform scale-95 transition-transform duration-300 border-4 border-brand-accent flex flex-col max-h-[85vh]">
-            <div class="flex justify-between items-center mb-3 pb-3 border-b-2 border-brand-accent">
-                <h3 class="text-lg font-lovely font-bold text-brand-dark dark:text-white flex items-center gap-2">
-                    <i class="fa-solid fa-list-check text-brand-accent"></i> 프로필 항목 관리 센터
+        <div class="bg-white dark:bg-brand-darkCardBg rounded-[2rem] shadow-2xl w-11/12 max-w-md p-6 transform scale-95 transition-transform duration-300 border-4 border-brand flex flex-col max-h-[85vh]">
+            <div class="flex justify-between items-center mb-3 pb-3 border-b-2 border-brand">
+                <h3 class="text-lg font-bold text-brand-dark dark:text-white flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-[#FF8E9E]"></i> 프로필 항목 관리 센터
                 </h3>
                 <button onclick="closeSectionManagerModal()" class="text-brand-dark dark:text-pink-100"><i class="fa-solid fa-xmark text-xl"></i></button>
             </div>
             <p class="text-xs text-gray-500 mb-3 font-semibold">화면에 노출할 항목을 정하고, 순서와 제목을 실시간 커스텀하세요!</p>
             
             <div id="section-manager-list" class="space-y-2.5 overflow-y-auto flex-grow pr-1">
-                <!-- 자바스크립트로 각 항목 활성화 여부 및 조정 버튼 탑재 -->
+                <!-- 자바스크립트로 자동 마운트 -->
             </div>
 
             <div class="mt-4 pt-3 border-t border-gray-200 dark:border-zinc-800 flex justify-end gap-2 text-xs font-bold">
-                <button onclick="triggerDefaultResetPrompt()" class="px-4 py-2.5 bg-red-100 text-red-600 rounded-xl hover:bg-red-200 transition-all">초기화</button>
-                <button onclick="closeSectionManagerModal()" class="px-5 py-2.5 bg-brand-accent text-white rounded-xl hover:scale-105 active:scale-95 transition-all shadow-md">설정 완료</button>
+                <button onclick="resetSectionsToDefault()" class="px-4 py-2.5 bg-red-100 text-red-600 rounded-xl hover:bg-red-200 transition-all">초기화</button>
+                <button onclick="closeSectionManagerModal()" class="px-5 py-2.5 bg-[#FF8E9E] text-white rounded-xl hover:scale-105 active:scale-95 transition-all">설정 완료</button>
             </div>
         </div>
     </div>
 
-    <!-- 3. [공통] 업보 현황 추가 모달 -->
+    <!-- 3. 업보 현황 추가 모달 -->
     <div id="add-user-modal" class="fixed inset-0 z-[110] flex items-center justify-center bg-black/70 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white dark:bg-brand-darkCardBg rounded-3xl shadow-2xl w-11/12 max-w-sm p-6 transform scale-95 transition-transform duration-300 border-4 border-brand-accent">
-            <h3 class="text-base font-lovely font-bold text-brand-dark dark:text-white mb-4"><i class="fa-solid fa-user-plus text-brand-accent mr-1"></i> 죄수단 숙제 신규 등록</h3>
+        <div class="bg-white dark:bg-brand-darkCardBg rounded-[2rem] shadow-2xl w-11/12 max-w-sm p-6 transform scale-95 transition-transform duration-300 border-4 border-brand">
+            <h3 class="text-base font-bold text-brand-dark dark:text-white mb-4"><i class="fa-solid fa-user-plus text-[#FF8E9E] mr-1"></i> 죄수단 숙제 신규 등록</h3>
             <div class="space-y-3.5 text-xs font-bold">
                 <div>
                     <label class="block text-gray-500 mb-1">SOOP ID (선택 - 프로필 연동용)</label>
-                    <input type="text" id="new-user-id" class="w-full bg-brand-light dark:bg-black/30 border-2 border-[#FFC2CD] text-gray-950 dark:text-pink-100 rounded-xl p-3 outline-none" placeholder="woujury">
+                    <input type="text" id="new-user-id" class="w-full bg-[#FFF5F6] dark:bg-black/30 border-2 border-brand rounded-xl p-3 outline-none" placeholder="woujury">
                 </div>
                 <div>
                     <label class="block text-gray-500 mb-1">닉네임 (필수)</label>
-                    <input type="text" id="new-user-nickname" class="w-full bg-brand-light dark:bg-black/30 border-2 border-[#FFC2CD] text-gray-950 dark:text-pink-100 rounded-xl p-3 outline-none" placeholder="착한죄수단">
+                    <input type="text" id="new-user-nickname" class="w-full bg-[#FFF5F6] dark:bg-black/30 border-2 border-brand rounded-xl p-3 outline-none" placeholder="착한죄수단">
                 </div>
             </div>
             <div class="mt-6 flex justify-end gap-2 text-xs font-bold">
                 <button onclick="closeAddUserModal()" class="px-4 py-2.5 bg-gray-200 rounded-xl text-gray-700">취소</button>
-                <button onclick="submitNewUser()" class="px-4 py-2.5 bg-[#FF6B8B] text-white rounded-xl shadow-md">등록</button>
+                <button onclick="submitNewUser()" class="px-4 py-2.5 bg-[#FF8E9E] text-white rounded-xl border-2 border-brand-dark">등록</button>
             </div>
         </div>
     </div>
 
-    <!-- 4. [공통] 업보 현황 개별 상세 편집 모달 -->
+    <!-- 4. 업보 현황 개별 상세 편집 모달 -->
     <div id="upbo-edit-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white dark:bg-brand-darkCardBg rounded-3xl shadow-2xl w-11/12 max-w-md overflow-hidden transform scale-95 transition-transform duration-300 border-4 border-brand-accent flex flex-col max-h-[80vh]">
-            <div class="p-4 flex items-center justify-between border-b-2 border-[#FFC2CD] bg-brand-light dark:bg-black/40">
+        <div class="bg-white dark:bg-brand-darkCardBg rounded-[2rem] shadow-2xl w-11/12 max-w-md overflow-hidden transform scale-95 transition-transform duration-300 border-4 border-brand flex flex-col max-h-[80vh]">
+            <div class="p-4 flex items-center justify-between border-b-2 border-brand bg-[#FFF0F2] dark:bg-black/40">
                 <div class="flex items-center gap-3" id="edit-modal-header"></div>
                 <div class="flex items-center gap-2">
-                    <button id="delete-user-confirm-btn" class="hidden text-[11px] bg-red-100 text-red-600 font-bold px-2.5 py-1.5 rounded-xl border border-red-500">
+                    <button id="delete-user-confirm-btn" class="hidden text-[10px] bg-red-100 text-red-600 font-bold px-2.5 py-1.5 rounded-lg border border-red-500">
                         <i class="fa-solid fa-user-minus"></i> 삭제
                     </button>
                     <button onclick="closeUpboEditModal()" class="text-brand-dark dark:text-pink-100 p-1"><i class="fa-solid fa-xmark text-xl"></i></button>
                 </div>
             </div>
             <div class="p-4 flex-grow overflow-y-auto" id="edit-modal-body"></div>
-            <div class="p-4 border-t-2 border-[#FFC2CD] bg-brand-light dark:bg-[#1C1516]/50">
+            <div class="p-4 border-t-2 border-brand bg-[#FFF5F6] dark:bg-[#1C1516]/50">
                 <div class="flex gap-2">
-                    <input type="text" id="new-item-name" class="flex-grow bg-white dark:bg-black/30 border-2 border-brand-accent text-gray-950 dark:text-pink-100 text-xs rounded-xl p-2.5 outline-none font-bold" placeholder="새로운 룰렛 리액션 추가...">
-                    <button onclick="addNewItem()" class="bg-[#FF6B8B] text-white px-4 py-2 rounded-xl text-xs font-bold shadow-md">추가</button>
+                    <input type="text" id="new-item-name" class="flex-grow bg-white dark:bg-black/30 border-2 border-brand text-brand-dark dark:text-pink-100 text-xs rounded-xl p-2.5 outline-none font-bold" placeholder="새로운 룰렛 리액션 추가...">
+                    <button onclick="addNewItem()" class="bg-[#FF8E9E] text-white border-2 border-brand px-4 py-2 rounded-xl text-xs font-bold">추가</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 5. [공통] 공지사항 추가 모달 -->
+    <!-- 5. 공지사항 추가 모달 -->
     <div id="notice-edit-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white dark:bg-brand-darkCardBg rounded-3xl shadow-2xl w-11/12 max-w-lg overflow-hidden transform scale-95 transition-transform duration-300 border-4 border-brand-accent flex flex-col max-h-[85vh]">
-            <div class="p-4 flex items-center justify-between border-b-2 border-brand-accent bg-brand-light dark:bg-black/40">
-                <h3 class="text-base font-lovely font-bold text-brand-dark dark:text-white flex items-center gap-1.5"><i class="fa-solid fa-bullhorn text-brand-accent animate-pulse"></i> 공지사항 관리</h3>
+        <div class="bg-white dark:bg-brand-darkCardBg rounded-[2rem] shadow-2xl w-11/12 max-w-lg overflow-hidden transform scale-95 transition-transform duration-300 border-4 border-brand flex flex-col max-h-[85vh]">
+            <div class="p-4 flex items-center justify-between border-b-2 border-brand bg-[#FFF0F2] dark:bg-black/40">
+                <h3 class="text-base font-bold text-brand-dark dark:text-white flex items-center gap-1.5"><i class="fa-solid fa-bullhorn text-[#FF8E9E]"></i> 공지사항 관리</h3>
                 <button onclick="closeNoticeEditModal()" class="text-brand-dark dark:text-pink-100 p-1"><i class="fa-solid fa-xmark text-xl"></i></button>
             </div>
             <div class="p-4 flex-grow overflow-y-auto space-y-2.5" id="notice-edit-list"></div>
-            <div class="p-4 border-t-2 border-brand-accent bg-brand-light dark:bg-[#1C1516] space-y-3 font-bold text-xs">
+            <div class="p-4 border-t-2 border-brand bg-[#FFF5F6] dark:bg-[#1C1516] space-y-3 font-bold text-xs">
                 <div class="flex gap-2">
-                    <select id="new-notice-type" class="bg-white dark:bg-black/30 border-2 border-brand-accent text-gray-950 dark:text-pink-100 rounded-xl p-2 outline-none w-24">
+                    <select id="new-notice-type" class="bg-white dark:bg-black/30 border-2 border-brand rounded-xl p-2 outline-none w-24">
                         <option value="필독">필독 📍</option>
                         <option value="공지">공지 📢</option>
                         <option value="일상">일상 🌸</option>
                     </select>
-                    <input type="text" id="new-notice-content" class="flex-grow bg-white dark:bg-black/30 border-2 border-brand-accent text-gray-950 dark:text-pink-100 rounded-xl p-2.5 outline-none" placeholder="내용을 채워보세요...">
+                    <input type="text" id="new-notice-content" class="flex-grow bg-white dark:bg-black/30 border-2 border-brand rounded-xl p-2.5 outline-none" placeholder="내용을 채워보세요...">
                 </div>
                 <div class="flex gap-2">
-                    <input type="text" id="new-notice-link" class="flex-grow bg-white dark:bg-black/30 border-2 border-brand-accent text-gray-950 dark:text-pink-100 rounded-xl p-2.5 outline-none" placeholder="이동 주소 (https://...)">
-                    <button onclick="addNewNotice()" class="bg-[#FF6B8B] text-white px-4 py-2.5 rounded-xl shadow-md">등록</button>
+                    <input type="text" id="new-notice-link" class="flex-grow bg-white dark:bg-black/30 border-2 border-brand rounded-xl p-2.5 outline-none" placeholder="이동 주소 (https://...)">
+                    <button onclick="addNewNotice()" class="bg-[#FF8E9E] text-white border-2 border-brand px-4 py-2.5 rounded-xl">등록</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 6. [공통] 주간일정 편집 모달 -->
+    <!-- 6. 주간일정 편집 모달 -->
     <div id="schedule-edit-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white dark:bg-brand-darkCardBg rounded-3xl shadow-2xl w-11/12 max-w-sm overflow-hidden transform scale-95 transition-transform duration-300 border-4 border-brand-accent flex flex-col max-h-[85vh]">
-            <div class="p-4 flex items-center justify-between border-b-2 border-brand-accent bg-brand-light dark:bg-black/40">
-                <h3 class="text-base font-lovely font-bold text-brand-dark dark:text-white flex items-center gap-1.5"><i class="fa-regular fa-calendar text-brand-accent"></i> 스케줄 변경</h3>
+        <div class="bg-white dark:bg-brand-darkCardBg rounded-[2rem] shadow-2xl w-11/12 max-w-sm overflow-hidden transform scale-95 transition-transform duration-300 border-4 border-brand flex flex-col max-h-[85vh]">
+            <div class="p-4 flex items-center justify-between border-b-2 border-brand bg-[#FFF0F2] dark:bg-black/40">
+                <h3 class="text-base font-bold text-brand-dark dark:text-white flex items-center gap-1.5"><i class="fa-regular fa-calendar text-[#FF8E9E]"></i> 스케줄 변경</h3>
                 <button onclick="closeScheduleEditModal()" class="text-brand-dark dark:text-pink-100 p-1"><i class="fa-solid fa-xmark text-xl"></i></button>
             </div>
             <div class="p-4 flex-grow overflow-y-auto space-y-2.5" id="schedule-edit-list"></div>
-            <div class="p-4 border-t-2 border-brand-accent bg-brand-light dark:bg-brand-dark flex justify-end">
-                <button onclick="saveScheduleChanges()" class="bg-[#FF6B8B] text-white px-6 py-2.5 rounded-xl font-bold text-xs shadow-md">저장완료</button>
+            <div class="p-4 border-t-2 border-brand bg-[#FFF5F6] dark:bg-brand-dark flex justify-end">
+                <button onclick="saveScheduleChanges()" class="bg-[#FF8E9E] text-white border-2 border-brand px-6 py-2.5 rounded-xl font-bold text-xs shadow-sm">저장완료</button>
             </div>
         </div>
     </div>
 
-    <!-- 7. [공통] 시그풍 추가 모달 (투명배경 PNG 파일 직접업로드 지원화 완료) -->
+    <!-- 7. 시그풍 추가/수정 모달 (정비율 293x164 가이드 완벽 제공) -->
     <div id="add-sigballoon-modal" class="fixed inset-0 z-[110] flex items-center justify-center bg-black/70 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white dark:bg-brand-darkCardBg rounded-3xl shadow-2xl w-11/12 max-w-sm p-6 transform scale-95 transition-transform duration-300 border-4 border-brand-accent">
-            <h3 class="text-base font-lovely font-bold text-brand-dark dark:text-white mb-4 flex items-center gap-1.5"><i class="fa-solid fa-star text-brand-accent animate-spin"></i> 시그니처 풍선 추가</h3>
+        <div class="bg-white dark:bg-brand-darkCardBg rounded-[2rem] shadow-2xl w-11/12 max-w-md p-6 transform scale-95 transition-transform duration-300 border-4 border-brand max-h-[90vh] overflow-y-auto">
+            <h3 class="text-base font-bold text-brand-dark dark:text-white mb-4 flex items-center gap-1.5"><i class="fa-solid fa-star text-[#FF8E9E]"></i> 시그니처 풍선 추가</h3>
             <div class="space-y-3.5 text-xs font-bold">
                 <div>
                     <label class="block text-gray-500 mb-1">풍선 수량 (숫자 필수)</label>
-                    <input type="number" id="new-sig-count" class="w-full bg-brand-light dark:bg-black/30 border-2 border-brand-accent text-gray-950 dark:text-pink-100 rounded-xl p-3 outline-none" placeholder="100">
+                    <input type="number" id="new-sig-count" class="w-full bg-[#FFF5F6] dark:bg-black/30 border-2 border-brand text-brand-dark dark:text-pink-100 rounded-xl p-3 outline-none" placeholder="100">
                 </div>
                 <div>
                     <label class="block text-gray-500 mb-1">제목/미션 내용</label>
-                    <input type="text" id="new-sig-name" class="w-full bg-brand-light dark:bg-black/30 border-2 border-brand-accent text-gray-950 dark:text-pink-100 rounded-xl p-3 outline-none" placeholder="시그니처 애교 리액션 💖">
+                    <input type="text" id="new-sig-name" class="w-full bg-[#FFF5F6] dark:bg-black/30 border-2 border-brand text-brand-dark dark:text-pink-100 rounded-xl p-3 outline-none" placeholder="시그니처 애교 리액션 💖">
                 </div>
                 <div>
                     <label class="block text-gray-500 mb-1">리액션 설명 및 기타내용</label>
-                    <input type="text" id="new-sig-desc" class="w-full bg-brand-light dark:bg-black/30 border-2 border-brand-accent text-gray-950 dark:text-pink-100 rounded-xl p-3 outline-none" placeholder="주리가 감미로운 보이스로 애교를 연사해요 🍭">
+                    <input type="text" id="new-sig-desc" class="w-full bg-[#FFF5F6] dark:bg-black/30 border-2 border-brand text-brand-dark dark:text-pink-100 rounded-xl p-3 outline-none" placeholder="주리가 상큼한 애교를 연사해요 🍭">
                 </div>
                 
-                <!-- PNG 사진 파일 직접 업로드 또는 URL 제공 이중시스템 장착 -->
-                <div class="border-t border-dashed border-[#FFC2CD] pt-3">
-                    <label class="block text-brand-accent mb-1"><i class="fa-solid fa-file-image mr-1"></i> 방법 1. 리액션 이미지 파일 직접 업로드 (투명 PNG 추천)</label>
-                    <input type="file" id="new-sig-file" accept="image/*" class="w-full bg-[#FFF0F2] dark:bg-black/40 border-2 border-[#FFC2CD] rounded-xl p-2 text-[11px] outline-none">
-                </div>
-                <div class="flex items-center gap-2">
-                    <div class="flex-grow border-t border-gray-300"></div>
-                    <span class="text-[9px] text-gray-400">OR</span>
-                    <div class="flex-grow border-t border-gray-300"></div>
-                </div>
+                <!-- 투명 배경 PNG 이미지 업로드 영역 -->
                 <div>
-                    <label class="block text-gray-500 mb-1">방법 2. 웹 이미지 링크 주소 (URL)</label>
-                    <input type="text" id="new-sig-image" class="w-full bg-brand-light dark:bg-black/30 border-2 border-brand-accent text-gray-950 dark:text-pink-100 rounded-xl p-3 outline-none" placeholder="https://example.com/reaction.png">
+                    <label class="block text-gray-500 mb-1">리액션 이미지 파일 (투명 PNG 권장, 정비율 293×164)</label>
+                    <div class="flex gap-2">
+                        <label class="cursor-pointer flex-1 bg-[#FFF5F6] dark:bg-black/30 border-2 border-brand rounded-xl p-3 text-center text-xs font-bold hover:bg-brand/10 transition-colors">
+                            <i class="fa-solid fa-cloud-arrow-up mr-1"></i> 파일 선택
+                            <input type="file" id="new-sig-img" class="hidden" accept="image/*" onchange="previewSigImage(event)">
+                        </label>
+                        <input type="text" id="new-sig-url" class="flex-[2] bg-[#FFF5F6] dark:bg-black/30 border-2 border-brand text-brand-dark dark:text-pink-100 rounded-xl p-3 outline-none text-xs" placeholder="또는 이미지 주소(URL) 입력">
+                    </div>
+                    <!-- 미리보기 디스플레이 -->
+                    <div id="new-sig-preview-container" class="mt-2.5 hidden">
+                        <span class="block text-[10px] text-gray-400 mb-1">293×164 크기 맞춤 미리보기:</span>
+                        <div class="w-[293px] h-[164px] max-w-full mx-auto rounded-xl border border-brand bg-transparent flex items-center justify-center overflow-hidden">
+                            <img id="new-sig-preview-img" class="w-full h-full object-contain" src="">
+                        </div>
+                    </div>
                 </div>
             </div>
+            
             <div class="mt-6 flex justify-end gap-2 text-xs font-bold">
                 <button onclick="closeAddSigballoonModal()" class="px-4 py-2.5 bg-gray-200 rounded-xl text-gray-700">취소</button>
-                <button onclick="submitNewSigballoon()" class="px-4 py-2.5 bg-[#FF6B8B] text-white rounded-xl shadow-md">등록</button>
+                <button onclick="submitNewSigballoon()" class="px-5 py-2.5 bg-[#FF8E9E] text-white rounded-xl border-2 border-brand shadow-sm">등록</button>
             </div>
         </div>
     </div>
 
-    <!-- 8. [공통] 기념일/디데이 관리 모달 -->
+    <!-- 8. 기념일/디데이 관리 모달 -->
     <div id="dday-edit-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white dark:bg-brand-darkCardBg rounded-3xl shadow-2xl w-11/12 max-w-sm overflow-hidden transform scale-95 transition-transform duration-300 border-4 border-brand-accent flex flex-col max-h-[85vh]">
-            <div class="p-4 flex items-center justify-between border-b-2 border-brand-accent bg-brand-light dark:bg-black/40">
-                <h3 class="text-base font-lovely font-bold text-brand-dark dark:text-white flex items-center gap-1.5"><i class="fa-regular fa-clock text-brand-accent"></i> 기념일 관리</h3>
+        <div class="bg-white dark:bg-brand-darkCardBg rounded-[2rem] shadow-2xl w-11/12 max-w-sm overflow-hidden transform scale-95 transition-transform duration-300 border-4 border-brand flex flex-col max-h-[85vh]">
+            <div class="p-4 flex items-center justify-between border-b-2 border-brand bg-[#FFF0F2] dark:bg-black/40">
+                <h3 class="text-base font-bold text-brand-dark dark:text-white flex items-center gap-1.5"><i class="fa-regular fa-clock text-[#FF8E9E]"></i> 기념일 관리</h3>
                 <button onclick="closeDdayEditModal()" class="text-brand-dark dark:text-pink-100 p-1"><i class="fa-solid fa-xmark text-xl"></i></button>
             </div>
             <div class="p-4 flex-grow overflow-y-auto space-y-2.5" id="dday-edit-list"></div>
-            <div class="p-4 border-t-2 border-brand-accent bg-brand-light dark:bg-brand-dark flex justify-between gap-2 text-xs font-bold">
-                <button onclick="addDdayRow()" class="px-3.5 py-2.5 bg-brand-accentMint text-brand-dark rounded-xl shadow-sm">기념일 추가</button>
-                <button onclick="saveDdayChanges()" class="px-5 py-2.5 bg-[#FF6B8B] text-white rounded-xl shadow-md">변경 저장</button>
+            <div class="p-4 border-t-2 border-brand bg-[#FFF5F6] dark:bg-brand-dark flex justify-between gap-2 text-xs font-bold">
+                <button onclick="addDdayRow()" class="px-3.5 py-2.5 bg-brand-accentGreen text-white rounded-xl">기념일 추가</button>
+                <button onclick="saveDdayChanges()" class="px-5 py-2.5 bg-[#FF8E9E] text-white rounded-xl">변경 저장</button>
             </div>
         </div>
     </div>
 
-    <!-- 9. [공통] 텍스트 입력창 (자기소개, 호불호, 방송정보, 배너수정 등) 편집 모달 -->
+    <!-- 9. 텍스트 입력창 편집 모달 -->
     <div id="general-edit-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white dark:bg-brand-darkCardBg rounded-3xl shadow-2xl w-11/12 max-w-md p-6 transform scale-95 transition-transform duration-300 border-4 border-brand-accent">
-            <h3 class="text-base font-lovely font-bold text-brand-dark dark:text-white mb-3" id="general-edit-title">편집</h3>
+        <div class="bg-white dark:bg-brand-darkCardBg rounded-[2rem] shadow-2xl w-11/12 max-w-md p-6 transform scale-95 transition-transform duration-300 border-4 border-brand">
+            <h3 class="text-base font-bold text-brand-dark dark:text-white mb-3" id="general-edit-title">편집</h3>
             <div id="general-edit-fields" class="space-y-4">
-                <!-- 자바스크립트로 동적 필드 렌더링 -->
+                <!-- 자바스크립트로 동적 렌더링 -->
             </div>
             <div class="mt-6 flex justify-end gap-2 text-xs font-bold">
                 <button onclick="closeGeneralEditModal()" class="px-4 py-2.5 bg-gray-200 rounded-xl text-gray-700">취소</button>
-                <button id="general-edit-save-btn" class="px-5 py-2.5 bg-[#FF6B8B] text-white rounded-xl shadow-md">저장</button>
+                <button id="general-edit-save-btn" class="px-5 py-2.5 bg-[#FF8E9E] text-white rounded-xl">저장</button>
             </div>
         </div>
     </div>
 
-    <!-- 10. [러블리 전용 고유 모달] 브라우저 alert/confirm 차단방지용 UI 컴포넌트 -->
-    <div id="lovely-alert-modal" class="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white dark:bg-brand-darkCardBg rounded-3xl p-6 max-w-sm w-11/12 border-4 border-[#FF6B8B] shadow-2xl text-center">
-            <div class="text-4xl mb-2" id="alert-icon">🎀</div>
-            <h3 class="text-lg font-lovely font-bold text-brand-dark dark:text-white mb-2" id="alert-title">알림</h3>
-            <p class="text-xs text-gray-500 dark:text-pink-200 mb-6 font-semibold" id="alert-desc">내용</p>
-            <button onclick="closeLovelyAlert()" class="px-6 py-2.5 rounded-xl bg-brand-accent text-white font-bold text-xs hover:scale-105 transition-transform shadow-md">확인했어요 💖</button>
-        </div>
-    </div>
-
-    <div id="lovely-confirm-modal" class="fixed inset-0 z-[190] flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white dark:bg-brand-darkCardBg rounded-3xl p-6 max-w-sm w-11/12 border-4 border-[#FF6B8B] shadow-2xl text-center">
-            <div class="text-4xl mb-2" id="confirm-icon">❓</div>
-            <h3 class="text-lg font-lovely font-bold text-brand-dark dark:text-white mb-2" id="confirm-title">선택</h3>
-            <p class="text-xs text-gray-500 dark:text-pink-200 mb-6 font-semibold" id="confirm-desc">정말 진행할까요?</p>
-            <div class="flex justify-center gap-3 font-bold text-xs">
-                <button id="confirm-cancel-btn" class="px-4 py-2.5 rounded-xl bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors">아니요</button>
-                <button id="confirm-ok-btn" class="px-5 py-2.5 rounded-xl bg-brand-accent text-white hover:bg-brand-accent/90 transition-colors shadow-md">네, 완료할게요 🍀</button>
+    <!-- 배너 전용 변경 모달 -->
+    <div id="banner-edit-modal" class="fixed inset-0 z-[110] flex items-center justify-center bg-black/70 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white dark:bg-brand-darkCardBg rounded-[2rem] shadow-2xl w-11/12 max-w-sm p-6 transform scale-95 transition-transform duration-300 border-4 border-brand">
+            <h3 class="text-base font-bold text-brand-dark dark:text-white mb-4"><i class="fa-solid fa-image text-[#FF8E9E] mr-1.5"></i> 배너 사진 설정</h3>
+            <div class="space-y-3 text-xs font-bold">
+                <div>
+                    <label class="block text-gray-500 mb-1">배너 사진 파일 직접 업로드</label>
+                    <label class="cursor-pointer block bg-[#FFF5F6] border-2 border-brand rounded-xl p-3 text-center text-xs hover:bg-brand/10 transition-colors">
+                        <i class="fa-solid fa-file-image mr-1"></i> 사진 업로드
+                        <input type="file" id="banner-file" class="hidden" accept="image/*" onchange="uploadBannerFile(event)">
+                    </label>
+                </div>
+                <div>
+                    <label class="block text-gray-500 mb-1">또는 외부 이미지 주소(URL) 입력</label>
+                    <input type="text" id="banner-url" class="w-full bg-[#FFF5F6] dark:bg-black/30 border-2 border-brand rounded-xl p-3 outline-none" placeholder="https://images.unsplash.com/...">
+                </div>
+            </div>
+            <div class="mt-6 flex justify-end gap-2 text-xs font-bold">
+                <button onclick="closeBannerEditModal()" class="px-4 py-2.5 bg-gray-200 rounded-xl text-gray-700">취소</button>
+                <button onclick="submitBannerChanges()" class="px-5 py-2.5 bg-[#FF8E9E] text-white rounded-xl">변경 완료</button>
             </div>
         </div>
     </div>
 
     <!-- 토스트 알림창 -->
-    <div id="toast-message" class="fixed bottom-6 right-6 z-[150] bg-brand-dark text-white border-2 border-brand-accent font-bold text-sm py-3.5 px-6 rounded-2xl shadow-xl transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-2">
-        <span id="toast-text">카피 완료! ⭐</span>
+    <div id="toast-message" class="fixed bottom-6 right-6 z-[150] bg-brand-dark text-white border-2 border-brand font-bold text-sm py-3.5 px-6 rounded-2xl shadow-xl transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-2">
+        <span id="toast-text">동기화 완료! ⭐</span>
     </div>
 
     <!-- 자바스크립트 통합 코어 시스템 -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { initializeFirestore } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { initializeFirestore, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // 새로운 파이어베이스 구성 설정 반영 (woujury-db)
+        // 파이어베이스 데이터베이스 구성 (woujury-db)
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'jury-profile-app';
         const firebaseConfig = {
             apiKey: "AIzaSyBDozqkocbmvTEuzCbtgFasu4ONPHRDaKI",
@@ -525,17 +539,16 @@
         };
 
         const app = initializeApp(firebaseConfig);
-        
-        // 가상 미리보기(iFrame) 환경에서의 웹소켓 차단을 우회하기 위해 Long Polling 강제 활성화 옵션 적용
+        // iframe 환경의 웹소켓 포트 차단 방지 목적의 experimentalForceLongPolling 설정 적용
         const db = initializeFirestore(app, {
             experimentalForceLongPolling: true
         });
         const auth = getAuth(app);
 
-        // 기본 프로필 구동 데이터
+        // 기본 프리셋 데이터 구성
         const defaultProfileData = {
+            introText: "우하하~! 반가워요잇! 딜탱맛집 여자친구이자 청순큐티섹시 리얼 스트리머 우주리이라고 해요! 💖\n숲(SOOP)과 유튜브에서 귀염뽀작 수다, 텐션 가득 종합게임, 야외방송(야방) 및 술먹방으로 죄수단들과 소통하고 있습니당! 🍀\n더욱 사랑스러운 사람이 될 수 있게 오늘도 열심히 텐션을 풀충전해 올게요! 다들 우주최강 찐따 주리랑 같이 놀아줘요! >_<",
             bannerImg: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=1200&auto=format&fit=crop",
-            introText: "우하하~! 반가워요잇! 딜탱맛집 여자친구이자 청순큐티섹시 리얼 스트리머 우주리라고 해요! 💖\n숲(SOOP)과 유튜브에서 귀염뽀작 수다, 텐션 가득 종합게임, 야외방송(야방) 및 술먹방으로 죄수단들과 소통하고 있습니당! 🍀\n더욱 사랑스러운 사람이 될 수 있게 오늘도 열심히 텐션을 풀충전해 올게요! 다들 우주최강 찐따 주리랑 같이 놀아줘요! >_<",
             tags: ["eiNFP", "딜탱맛집", "청순큐티섹시", "수니문서버", "행배스쿼드"],
             likes: ["죄수단 💖", "배그 🎮", "소주 & 술뱅 🍾", "소통하기 👥", "야외방송 🌸"],
             dislikes: ["공포 게임 👻", "억까/과몰입 👿", "재미없는 잔소리 🥱", "금식해야 하는 병원검진 🏥"],
@@ -564,7 +577,7 @@
 
         const defaultDdaysData = [
             { title: "🎂 우주리 탄생일", type: "birthday", date: "01-21" },
-            { title: "💖 첫 데뷔 기념일", type: "anniversary", date: "2023-07-26" },
+            { title: "💖 감동의 첫 데뷔일", type: "anniversary", date: "2023-07-26" },
             { title: "🍀 다음 복귀 디데이", type: "dday", date: "2026-08-01" }
         ];
 
@@ -575,10 +588,8 @@
         ];
 
         const defaultSigballoonData = [
-            { count: 100, name: "주리의 귀염 애교 💖", desc: "주리가 죄수단만을 위해 앙증맞은 목소리로 애교 한 사발을 연사합미다!", image: "https://placehold.co/293x164/FFF0F2/FF6B8B?text=Jury+Cute+🍭" },
-            { count: 282, name: "수줍은 볼하트 룰렛 ⭐", desc: "이모지가 피어오르는 청순큐티한 표정으로 볼하트를 유지해요!", image: "" },
-            { count: 486, name: "시그니처 미니 댄스 💃", desc: "우주최강 귀염 몸치 주리의 상큼발랄 즉흥 댄스타임!", image: "" },
-            { count: 1004, name: "수호천사 소원 우선권 💫", desc: "미션 배그나 콘텐츠 도중 소원 하나를 바로 요청해 볼 수 있어요!", image: "" }
+            { count: 100, name: "주리의 귀염 애교 💖", desc: "주리가 죄수단만을 위해 앙증맞은 목소리로 애교 한 사발을 연사합미다!", img: "https://placehold.co/293x164/FFF0F2/FF8E9E?text=WouJURY+Sig+💖" },
+            { count: 282, name: "수줍은 볼하트 룰렛 ⭐", desc: "이모지가 피어오르는 청순큐티한 표정으로 볼하트를 유지해요!", img: "" }
         ];
 
         const defaultSections = [
@@ -592,7 +603,7 @@
             { id: "sigballoon", title: "시그풍 리스트 🍬", enabled: true }
         ];
 
-        // 글로벌 변수 바인딩
+        // 런타임 캐싱 변수
         let globalProfileData = {};
         let globalNoticeData = [];
         let globalScheduleData = [];
@@ -605,7 +616,44 @@
         let currentEditingUserId = null;
         let deleteConfirmState = false;
 
-        // 로컬 브라우저 세션 보조
+        // 자체 내장 알림 및 확인 시스템 구동 (alert, confirm 완전 대체)
+        function lovelyAlert(message, title = "알림 💖") {
+            document.getElementById('lovely-alert-title').innerText = title;
+            document.getElementById('lovely-alert-message').innerText = message;
+            const modal = document.getElementById('lovely-alert-modal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.remove('scale-95');
+            modal.querySelector('div').classList.add('scale-100');
+        }
+        window.closeLovelyAlert = function() {
+            const modal = document.getElementById('lovely-alert-modal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.add('scale-95');
+        }
+
+        function lovelyConfirm(message, onConfirm, title = "선택해 주리 ❓") {
+            document.getElementById('lovely-confirm-title').innerText = title;
+            document.getElementById('lovely-confirm-message').innerText = message;
+            const modal = document.getElementById('lovely-confirm-modal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.remove('scale-95');
+            modal.querySelector('div').classList.add('scale-100');
+            
+            document.getElementById('lovely-confirm-ok').onclick = () => {
+                closeLovelyConfirm();
+                if (onConfirm) onConfirm();
+            };
+            document.getElementById('lovely-confirm-cancel').onclick = () => {
+                closeLovelyConfirm();
+            };
+        }
+        function closeLovelyConfirm() {
+            const modal = document.getElementById('lovely-confirm-modal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.add('scale-95');
+        }
+
+        // 로컬 보조 저장 스토리지 유틸
         function safeGetStorage(key, defaultValue) {
             try {
                 const item = window.localStorage.getItem(key);
@@ -653,6 +701,7 @@
                         globalSigballoonData = data.sigballoon || defaultSigballoonData;
                         globalSections = data.sections || defaultSections;
 
+                        // 스토리지에 캐시 백업
                         safeSetStorage('juryProfile', globalProfileData);
                         safeSetStorage('juryNotice', globalNoticeData);
                         safeSetStorage('jurySchedule', globalScheduleData);
@@ -709,6 +758,7 @@
         document.addEventListener('DOMContentLoaded', async () => {
             generateBgBlossom();
 
+            // 테마 토글 설정
             const themeToggleBtns = [document.getElementById('theme-toggle'), document.getElementById('mobile-theme-toggle')];
             const html = document.documentElement;
             let savedTheme = 'light';
@@ -743,6 +793,7 @@
                 });
             }
 
+            // 모바일 메뉴 제어
             const mobileBtn = document.getElementById('mobile-menu-btn');
             if (mobileBtn) {
                 mobileBtn.addEventListener('click', () => {
@@ -754,24 +805,25 @@
             renderEverything();
         });
 
+        // 흩날리는 벚꽃가루 생성기
         function generateBgBlossom() {
-            const container = document.getElementById('cherry-bg');
+            const container = document.getElementById('blossom-bg');
             if (!container) return;
-            const items = ['🌸', '💖', '🍀', '🍬', '✨', '🎀', '🧸'];
+            const items = ['🌸', '💖', '🍀', '🍬', '✨'];
             
             setInterval(() => {
                 const element = document.createElement('div');
-                element.className = 'cherry-particle text-sm select-none';
+                element.className = 'blossom-particle text-sm select-none';
                 element.style.left = Math.random() * 100 + 'vw';
                 element.style.top = '-20px';
-                element.style.fontSize = Math.random() * (22 - 12) + 12 + 'px';
-                element.style.animationDuration = Math.random() * (10 - 5) + 5 + 's';
-                element.style.opacity = Math.random() * 0.75 + 0.25;
+                element.style.fontSize = Math.random() * (22 - 10) + 10 + 'px';
+                element.style.animationDuration = Math.random() * (12 - 6) + 6 + 's';
+                element.style.opacity = Math.random() * 0.7 + 0.2;
                 element.innerText = items[Math.floor(Math.random() * items.length)];
                 
                 container.appendChild(element);
-                setTimeout(() => { element.remove(); }, 10000);
-            }, 1500);
+                setTimeout(() => { element.remove(); }, 12000);
+            }, 1800);
         }
 
         function showToast(message) {
@@ -789,69 +841,11 @@
             }, 2500);
         }
 
-        // Custom Lovely Alert
-        function showLovelyAlert(title, desc, icon = '🎀') {
-            const modal = document.getElementById('lovely-alert-modal');
-            document.getElementById('alert-icon').innerText = icon;
-            document.getElementById('alert-title').innerText = title;
-            document.getElementById('alert-desc').innerText = desc;
-            
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            modal.querySelector('div').classList.remove('scale-95');
-            modal.querySelector('div').classList.add('scale-100');
-        }
-
-        function closeLovelyAlert() {
-            const modal = document.getElementById('lovely-alert-modal');
-            modal.classList.add('opacity-0', 'pointer-events-none');
-            modal.querySelector('div').classList.add('scale-95');
-        }
-
-        // Custom Lovely Confirm
-        function showLovelyConfirm(title, desc, onConfirm, icon = '❓') {
-            const modal = document.getElementById('lovely-confirm-modal');
-            document.getElementById('confirm-icon').innerText = icon;
-            document.getElementById('confirm-title').innerText = title;
-            document.getElementById('confirm-desc').innerText = desc;
-            
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            modal.querySelector('div').classList.remove('scale-95');
-            modal.querySelector('div').classList.add('scale-100');
-            
-            const cancelBtn = document.getElementById('confirm-cancel-btn');
-            const okBtn = document.getElementById('confirm-ok-btn');
-            
-            cancelBtn.onclick = () => {
-                closeLovelyConfirm();
-            };
-            
-            okBtn.onclick = () => {
-                closeLovelyConfirm();
-                onConfirm();
-            };
-        }
-
-        function closeLovelyConfirm() {
-            const modal = document.getElementById('lovely-confirm-modal');
-            modal.classList.add('opacity-0', 'pointer-events-none');
-            modal.querySelector('div').classList.add('scale-95');
-        }
-
         function renderEverything() {
-            // 배너 이미지 실시간 마운트
-            const bannerImgEl = document.getElementById('profile-banner-img');
-            if (bannerImgEl) {
-                bannerImgEl.src = globalProfileData.bannerImg || 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=1200&auto=format&fit=crop';
-            }
-
-            // 관리자 모드 배너 버튼 동적 활성
-            const editBannerBtn = document.getElementById('edit-banner-btn');
-            if (editBannerBtn) {
-                if (isAdminMode) {
-                    editBannerBtn.classList.remove('hidden');
-                } else {
-                    editBannerBtn.classList.add('hidden');
-                }
+            // 배너 이미지 갱신
+            const bannerImg = document.getElementById('profile-banner-img');
+            if (bannerImg && globalProfileData.bannerImg) {
+                bannerImg.src = globalProfileData.bannerImg;
             }
 
             const wrapper = document.getElementById('dynamic-sections');
@@ -863,46 +857,46 @@
 
                 let sectionHtml = '';
                 const editButton = isAdminMode ? `
-                    <button onclick="editSectionContent('${section.id}')" class="text-brand-accent dark:text-brand hover:scale-125 transition-transform p-1" title="내용 직접편집">
+                    <button onclick="editSectionContent('${section.id}')" class="text-[#FF8E9E] hover:scale-110 transition-all p-1" title="직접 편집">
                         <i class="fa-solid fa-pen-to-square text-sm"></i>
                     </button>
                 ` : '';
 
                 if (section.id === 'intro') {
                     const formattedIntro = (globalProfileData.introText || '').replace(/\n/g, '<br>');
-                    const tagsHtml = (globalProfileData.tags || []).map(t => `<span class="px-3 py-1 bg-brand-light dark:bg-brand-dark text-brand-accent dark:text-brand border border-[#FFC2CD] rounded-2xl text-xs font-bold">#${t}</span>`).join('');
+                    const tagsHtml = (globalProfileData.tags || []).map(t => `<span class="px-3 py-1 bg-[#FFF0F2] dark:bg-brand-dark text-brand-dark dark:text-pink-100 border border-brand rounded-xl text-xs font-bold shadow-sm">#${t}</span>`).join('');
                     
                     sectionHtml = `
-                        <div class="bg-white/80 dark:bg-brand-darkCardBg border-4 border-brand-accent/25 dark:border-brand/40 rounded-3xl p-6 box-shadow-lovely hover-card-effect relative transition-colors duration-300">
-                            <div class="flex justify-between items-center mb-4 border-b-2 border-brand-light dark:border-brand-darkCardBg pb-2">
-                                <h3 class="text-lg font-lovely font-bold text-brand-dark dark:text-white flex items-center gap-2">
-                                    <span class="text-xl lovely-heart">💖</span> ${section.title}
+                        <div class="bg-white dark:bg-brand-darkCardBg border-4 border-brand rounded-3xl p-6 box-shadow-lovely relative transition-colors duration-300">
+                            <div class="flex justify-between items-center mb-4 border-b border-brand/40 pb-2">
+                                <h3 class="text-lg font-bold text-brand-dark dark:text-white flex items-center gap-2">
+                                    <span class="text-xl">💖</span> ${section.title}
                                 </h3>
                                 ${editButton}
                             </div>
                             <p class="text-sm leading-relaxed mb-4 text-gray-800 dark:text-pink-100 font-semibold">${formattedIntro}</p>
-                            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-dashed border-pink-200 dark:border-zinc-800">${tagsHtml}</div>
+                            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-dashed border-pink-100 dark:border-zinc-800">${tagsHtml}</div>
                         </div>
                     `;
                 } else if (section.id === 'likehate') {
-                    const likesHtml = (globalProfileData.likes || []).map(l => `<span class="px-3 py-1 bg-[#E8FADF] dark:bg-zinc-800/80 text-emerald-600 dark:text-emerald-300 rounded-2xl text-xs font-bold border border-emerald-200">🌱 ${l}</span>`).join('');
-                    const hatesHtml = (globalProfileData.dislikes || []).map(d => `<span class="px-3 py-1 bg-brand-light dark:bg-[#3D1E22] text-brand-accent dark:text-pink-200 rounded-2xl text-xs font-bold border border-red-200">❌ ${d}</span>`).join('');
+                    const likesHtml = (globalProfileData.likes || []).map(l => `<span class="px-3 py-1 bg-[#E8F5E9] dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-300 rounded-xl text-xs font-bold border border-emerald-200">🌱 ${l}</span>`).join('');
+                    const hatesHtml = (globalProfileData.dislikes || []).map(d => `<span class="px-3 py-1 bg-[#FFF0F2] dark:bg-red-950/40 text-rose-500 dark:text-rose-300 rounded-xl text-xs font-bold border border-rose-200">❌ ${d}</span>`).join('');
                     
                     sectionHtml = `
-                        <div class="bg-white/80 dark:bg-brand-darkCardBg border-4 border-brand-accent/25 dark:border-brand/40 rounded-3xl p-6 box-shadow-lovely hover-card-effect relative transition-colors duration-300">
-                            <div class="flex justify-between items-center mb-4 border-b-2 border-brand-light dark:border-brand-darkCardBg pb-2">
-                                <h3 class="text-lg font-lovely font-bold text-brand-dark dark:text-white flex items-center gap-2">
+                        <div class="bg-white dark:bg-brand-darkCardBg border-4 border-brand rounded-3xl p-6 box-shadow-lovely relative transition-colors duration-300">
+                            <div class="flex justify-between items-center mb-4 border-b border-brand/40 pb-2">
+                                <h3 class="text-lg font-bold text-brand-dark dark:text-white flex items-center gap-2">
                                     <span class="text-xl">🍀</span> ${section.title}
                                 </h3>
                                 ${editButton}
                             </div>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 font-semibold">
                                 <div>
-                                    <h4 class="text-sm font-bold text-emerald-600 dark:text-emerald-300 mb-3"><i class="fa-regular fa-face-smile mr-1.5"></i> 좋아하는 거</h4>
+                                    <h4 class="text-sm font-bold text-emerald-500 mb-3"><i class="fa-regular fa-face-smile mr-1.5"></i> 좋아하는 거</h4>
                                     <div class="flex flex-wrap gap-1.5">${likesHtml}</div>
                                 </div>
                                 <div>
-                                    <h4 class="text-sm font-bold text-brand-accent mb-3"><i class="fa-regular fa-face-frown mr-1.5"></i> 싫어하는 거</h4>
+                                    <h4 class="text-sm font-bold text-rose-400 mb-3"><i class="fa-regular fa-face-frown mr-1.5"></i> 싫어하는 거</h4>
                                     <div class="flex flex-wrap gap-1.5">${hatesHtml}</div>
                                 </div>
                             </div>
@@ -915,10 +909,10 @@
                     ddays.forEach(dday => {
                         const ddayResult = calculateDDayString(dday.type, dday.date);
                         ddayRows += `
-                            <div class="flex items-center justify-between p-3.5 bg-brand-light dark:bg-[#201012] rounded-2xl border border-brand/20">
+                            <div class="flex items-center justify-between p-3.5 bg-[#FFF0F2] dark:bg-[#1E1415] rounded-2xl border border-brand/30">
                                 <div class="flex flex-col">
-                                    <span class="text-sm font-bold text-[#3D1E22] dark:text-gray-200">${dday.title}</span>
-                                    <span class="text-[10px] text-pink-400 font-bold mt-0.5">${dday.date}</span>
+                                    <span class="text-sm font-bold text-brand-dark dark:text-gray-200">${dday.title}</span>
+                                    <span class="text-[10px] text-gray-400 font-bold mt-0.5">${dday.date}</span>
                                 </div>
                                 <div class="text-right">${ddayResult}</div>
                             </div>
@@ -926,12 +920,12 @@
                     });
 
                     sectionHtml = `
-                        <div class="bg-white/80 dark:bg-brand-darkCardBg border-4 border-brand-accent/25 dark:border-brand/40 rounded-3xl p-6 box-shadow-lovely hover-card-effect relative transition-colors duration-300">
-                            <div class="flex justify-between items-center mb-4 border-b-2 border-brand-light dark:border-brand-darkCardBg pb-2">
-                                <h3 class="text-lg font-lovely font-bold text-brand-dark dark:text-white flex items-center gap-2">
+                        <div class="bg-white dark:bg-brand-darkCardBg border-4 border-brand rounded-3xl p-6 box-shadow-lovely relative transition-colors duration-300">
+                            <div class="flex justify-between items-center mb-4 border-b border-brand/40 pb-2">
+                                <h3 class="text-lg font-bold text-brand-dark dark:text-white flex items-center gap-2">
                                     <span class="text-xl">📅</span> ${section.title}
                                 </h3>
-                                ${isAdminMode ? `<button onclick="openDdayEditModal()" class="text-brand-accent dark:text-brand hover:scale-125 p-1"><i class="fa-solid fa-pen-to-square text-sm"></i></button>` : ''}
+                                ${isAdminMode ? `<button onclick="openDdayEditModal()" class="text-[#FF8E9E] hover:scale-110 p-1"><i class="fa-solid fa-pen-to-square text-sm"></i></button>` : ''}
                             </div>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 font-semibold">${ddayRows}</div>
                         </div>
@@ -939,26 +933,26 @@
                 } else if (section.id === 'broadcast') {
                     const broadcast = globalProfileData.broadcast || defaultProfileData.broadcast;
                     sectionHtml = `
-                        <div class="bg-white/80 dark:bg-brand-darkCardBg border-4 border-brand-accent/25 dark:border-brand/40 rounded-3xl p-6 box-shadow-lovely hover-card-effect relative transition-colors duration-300">
-                            <div class="flex justify-between items-center mb-4 border-b-2 border-brand-light dark:border-brand-darkCardBg pb-2">
-                                <h3 class="text-lg font-lovely font-bold text-brand-dark dark:text-white flex items-center gap-2">
+                        <div class="bg-white dark:bg-brand-darkCardBg border-4 border-brand rounded-3xl p-6 box-shadow-lovely relative transition-colors duration-300">
+                            <div class="flex justify-between items-center mb-4 border-b border-brand/40 pb-2">
+                                <h3 class="text-lg font-bold text-brand-dark dark:text-white flex items-center gap-2">
                                     <span class="text-xl">🌸</span> ${section.title}
                                 </h3>
                                 ${editButton}
                             </div>
                             <div class="space-y-3 text-sm font-semibold text-gray-800 dark:text-pink-100">
                                 <div class="flex flex-col sm:flex-row sm:items-center gap-1.5">
-                                    <span class="text-brand-accent font-bold w-24 flex-shrink-0"><i class="fa-regular fa-clock mr-1.5"></i> 방송 시간</span>
+                                    <span class="text-[#FF8E9E] font-bold w-24 flex-shrink-0"><i class="fa-regular fa-clock mr-1.5"></i> 방송 시간</span>
                                     <span>${broadcast.time}</span>
                                 </div>
-                                <div class="border-b border-dashed border-pink-200 dark:border-zinc-800"></div>
+                                <div class="border-b border-dashed border-pink-100 dark:border-zinc-800"></div>
                                 <div class="flex flex-col sm:flex-row sm:items-center gap-1.5">
-                                    <span class="text-brand-accentPurple font-bold w-24 flex-shrink-0"><i class="fa-regular fa-star mr-1.5"></i> 주 콘텐츠</span>
+                                    <span class="text-brand-accentGreen font-bold w-24 flex-shrink-0"><i class="fa-regular fa-star mr-1.5"></i> 주 콘텐츠</span>
                                     <span>${broadcast.content}</span>
                                 </div>
-                                <div class="border-b border-dashed border-pink-200 dark:border-zinc-800"></div>
+                                <div class="border-b border-dashed border-pink-100 dark:border-zinc-800"></div>
                                 <div class="flex flex-col sm:flex-row sm:items-center gap-1.5">
-                                    <span class="text-brand-accent font-bold w-24 flex-shrink-0"><i class="fa-solid fa-triangle-exclamation mr-1.5"></i> 방송 규칙</span>
+                                    <span class="text-[#E23F82] font-bold w-24 flex-shrink-0"><i class="fa-solid fa-triangle-exclamation mr-1.5"></i> 방송 규칙</span>
                                     <span>${broadcast.rules}</span>
                                 </div>
                             </div>
@@ -969,19 +963,19 @@
                     const notices = globalNoticeData.length > 0 ? globalNoticeData : defaultNoticeData;
 
                     notices.forEach((notice, index) => {
-                        let badgeClass = '', bgClass = 'p-3 rounded-2xl hover:bg-brand-light/40 dark:hover:bg-brand-dark/30 transition-all';
+                        let badgeClass = '', bgClass = 'p-3 rounded-2xl hover:bg-[#FFF0F2]/50 dark:hover:bg-brand-dark/30 transition-all';
                         if (notice.typeColor === 'red') { 
-                            badgeClass = 'bg-[#FEDBE0] text-brand-dark border border-brand-accent'; 
-                            bgClass = 'bg-brand-light dark:bg-[#32171A] p-4 rounded-2xl border-2 border-[#FFC2CD]'; 
+                            badgeClass = 'bg-[#FFCCD3] text-brand-dark border-2 border-brand'; 
+                            bgClass = 'bg-[#FFF0F2] dark:bg-brand-dark p-4 rounded-2xl border-2 border-brand'; 
                         } else if (notice.typeColor === 'blue') { 
-                            badgeClass = 'bg-blue-100 text-brand-accent dark:bg-blue-900/50 dark:text-blue-300'; 
+                            badgeClass = 'bg-blue-100 text-blue-500 dark:bg-blue-950/50 dark:text-blue-300'; 
                         } else { 
                             badgeClass = 'bg-gray-100 text-gray-600 dark:bg-zinc-800 dark:text-pink-200'; 
                         }
 
                         const actionLink = notice.link ? `
                             <div class="mt-2">
-                                <a href="${notice.link}" target="_blank" class="inline-flex items-center gap-1 bg-brand-accent text-white text-[11px] px-3 py-1 rounded-xl shadow-sm hover:scale-105 transition-transform">
+                                <a href="${notice.link}" target="_blank" class="inline-flex items-center gap-1 bg-[#FF8E9E] hover:bg-[#ff7386] text-white text-[11px] px-2.5 py-1 rounded-lg border border-brand shadow-sm transition-all">
                                     공지 보러가기 <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
                                 </a>
                             </div>
@@ -991,21 +985,21 @@
                             <li class="${bgClass} font-semibold text-xs sm:text-sm">
                                 <div class="flex justify-between items-center mb-1.5">
                                     <span class="${badgeClass} text-[10px] px-2 py-0.5 rounded-lg font-bold">${notice.type}</span>
-                                    <span class="text-[10px] text-pink-400 font-bold">${notice.date}</span>
+                                    <span class="text-[10px] text-gray-400 font-bold">${notice.date}</span>
                                 </div>
-                                <p class="text-gray-800 dark:text-pink-150 ${notice.typeColor === 'red' ? 'font-bold text-brand-accent' : ''}">${notice.content}</p>
+                                <p class="text-gray-800 dark:text-pink-150 ${notice.typeColor === 'red' ? 'font-bold text-brand-dark dark:text-brand' : ''}">${notice.content}</p>
                                 ${actionLink}
                             </li>
                         `;
                     });
 
                     sectionHtml = `
-                        <div class="bg-white/80 dark:bg-brand-darkCardBg border-4 border-brand-accent/25 dark:border-brand/40 rounded-3xl p-6 box-shadow-lovely hover-card-effect relative transition-colors duration-300">
-                            <div class="flex justify-between items-center mb-4 border-b-2 border-brand-light dark:border-brand-darkCardBg pb-2">
-                                <h3 class="text-lg font-lovely font-bold text-brand-dark dark:text-white flex items-center gap-2">
+                        <div class="bg-white dark:bg-brand-darkCardBg border-4 border-brand rounded-3xl p-6 box-shadow-lovely relative transition-colors duration-300">
+                            <div class="flex justify-between items-center mb-4 border-b border-brand/40 pb-2">
+                                <h3 class="text-lg font-bold text-brand-dark dark:text-white flex items-center gap-2">
                                     <span class="text-xl">📢</span> ${section.title}
                                 </h3>
-                                ${isAdminMode ? `<button onclick="openNoticeEditModal()" class="text-brand-accent dark:text-brand hover:scale-125 p-1"><i class="fa-solid fa-pen-to-square text-sm"></i></button>` : ''}
+                                ${isAdminMode ? `<button onclick="openNoticeEditModal()" class="text-[#FF8E9E] hover:scale-110 p-1"><i class="fa-solid fa-pen-to-square text-sm"></i></button>` : ''}
                             </div>
                             <ul class="space-y-3 max-h-[350px] overflow-y-auto">${noticeRows}</ul>
                         </div>
@@ -1017,21 +1011,21 @@
                     schedules.forEach(sched => {
                         const isRest = sched.isRest;
                         const dayBadgeClass = isRest
-                            ? 'text-white bg-brand-accent border border-brand-accent font-bold shadow-md'
-                            : 'text-gray-500 dark:text-zinc-400 bg-gray-100 dark:bg-zinc-800 border border-black/5';
+                            ? 'text-white bg-[#E23F82] border-2 border-brand font-bold shadow-sm'
+                            : 'text-gray-500 dark:text-zinc-400 bg-gray-100 dark:bg-zinc-800 border border-black/10';
 
                         const textClass = isRest
-                            ? 'text-brand-accent font-bold animate-pulse'
+                            ? 'text-[#E23F82] font-bold animate-pulse'
                             : 'text-gray-700 dark:text-pink-100 font-semibold';
 
                         const cardBgClass = isRest
-                            ? 'bg-brand/10 dark:bg-brand-dark border border-[#FFD6DC]'
-                            : 'hover:bg-brand-light/30 dark:hover:bg-[#1C1516]/50 border border-transparent';
+                            ? 'bg-brand/10 dark:bg-brand-dark border-2 border-brand/20'
+                            : 'hover:bg-[#FFF0F2]/40 dark:hover:bg-[#1C1516]/50 border border-transparent';
 
                         scheduleRows += `
-                            <div class="flex items-center justify-between p-2.5 rounded-2xl ${cardBgClass} transition-colors">
+                            <div class="flex items-center justify-between p-2.5 rounded-xl ${cardBgClass} transition-colors">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 flex items-center justify-center text-xs rounded-xl ${dayBadgeClass}">${sched.day}</div>
+                                    <div class="w-8 h-8 flex items-center justify-center text-xs rounded-lg ${dayBadgeClass}">${sched.day}</div>
                                     <div class="text-xs sm:text-sm ${textClass}">${sched.content}</div>
                                 </div>
                             </div>
@@ -1039,12 +1033,12 @@
                     });
 
                     sectionHtml = `
-                        <div class="bg-white/80 dark:bg-brand-darkCardBg border-4 border-brand-accent/25 dark:border-brand/40 rounded-3xl p-6 box-shadow-lovely hover-card-effect relative transition-colors duration-300">
-                            <div class="flex justify-between items-center mb-4 border-b-2 border-brand-light dark:border-brand-darkCardBg pb-2">
-                                <h3 class="text-lg font-lovely font-bold text-brand-dark dark:text-white flex items-center gap-2">
+                        <div class="bg-white dark:bg-brand-darkCardBg border-4 border-brand rounded-3xl p-6 box-shadow-lovely relative transition-colors duration-300">
+                            <div class="flex justify-between items-center mb-4 border-b border-brand/40 pb-2">
+                                <h3 class="text-lg font-bold text-brand-dark dark:text-white flex items-center gap-2">
                                     <span class="text-xl">📆</span> ${section.title}
                                 </h3>
-                                ${isAdminMode ? `<button onclick="openScheduleEditModal()" class="text-brand-accent dark:text-brand hover:scale-125 p-1"><i class="fa-solid fa-pen-to-square text-sm"></i></button>` : ''}
+                                ${isAdminMode ? `<button onclick="openScheduleEditModal()" class="text-[#FF8E9E] hover:scale-110 p-1"><i class="fa-solid fa-pen-to-square text-sm"></i></button>` : ''}
                             </div>
                             <div class="space-y-2.5">${scheduleRows}</div>
                         </div>
@@ -1056,78 +1050,78 @@
                     upboList.forEach(user => {
                         const totalItems = (user.items || []).reduce((sum, item) => sum + item.count, 0);
                         const avatarHtml = getAvatarHTML(user, true);
-                        const adminBadge = isAdminMode ? `<div class="absolute top-2 right-2 text-brand-accent"><i class="fa-solid fa-pen-to-square text-xs"></i></div>` : '';
+                        const adminBadge = isAdminMode ? `<div class="absolute top-2 right-2 text-[#FF8E9E]"><i class="fa-solid fa-pen-to-square text-xs"></i></div>` : '';
 
                         upboCards += `
-                            <div onclick="clickUpboCard('${user.id}')" class="bg-white dark:bg-[#1C1516] border-2 border-pink-200 dark:border-brand/45 rounded-2xl p-4 flex flex-col items-center justify-center cursor-pointer hover:bg-brand-light hover:scale-105 transition-all shadow-md relative">
+                            <div onclick="clickUpboCard('${user.id}')" class="bg-white dark:bg-[#1C1516] border-2 border-brand rounded-2xl p-4 flex flex-col items-center justify-center cursor-pointer hover:bg-brand-light/50 hover:translate-y-[-2px] transition-all shadow-sm relative">
                                 ${adminBadge}
                                 ${avatarHtml}
                                 <div class="text-brand-dark dark:text-pink-100 font-bold text-xs truncate w-full text-center mb-1.5">${user.nickname}</div>
-                                <div class="bg-brand-accent text-white text-[9px] font-bold px-2 py-0.5 rounded-lg shadow-sm">리액션 ${totalItems}개</div>
+                                <div class="bg-[#FF8E9E] text-white text-[9px] font-bold px-2 py-0.5 rounded-md">리액션 ${totalItems}개</div>
                             </div>
                         `;
                     });
 
                     sectionHtml = `
-                        <div class="bg-white/80 dark:bg-brand-darkCardBg border-4 border-brand-accent/25 dark:border-brand/40 rounded-3xl p-6 box-shadow-lovely hover-card-effect relative transition-colors duration-300">
-                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 border-b-2 border-brand-light dark:border-brand-darkCardBg pb-3">
-                                <h3 class="text-lg font-lovely font-bold text-brand-dark dark:text-white flex items-center gap-2">
+                        <div class="bg-white dark:bg-brand-darkCardBg border-4 border-brand rounded-3xl p-6 box-shadow-lovely relative transition-colors duration-300">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 border-b border-brand/40 pb-3">
+                                <h3 class="text-lg font-bold text-brand-dark dark:text-white flex items-center gap-2">
                                     <span class="text-xl">⛓️</span> ${section.title}
                                 </h3>
                                 <div class="flex items-center gap-2">
-                                    <input type="text" id="upbo-search" class="bg-brand-light dark:bg-black/30 border border-[#FFC2CD] text-xs rounded-xl p-2 outline-none font-bold" placeholder="죄수단 닉네임 검색..." oninput="filterUpboList(this.value)">
-                                    ${isAdminMode ? `<button onclick="openAddUserModal()" class="bg-brand-accent text-white text-xs px-2.5 py-1.5 rounded-xl"><i class="fa-solid fa-user-plus"></i></button>` : ''}
+                                    <input type="text" id="upbo-search" class="bg-[#FFF5F6] dark:bg-black/30 border border-brand text-xs rounded-lg p-2 outline-none font-bold" placeholder="죄수단 닉네임 검색..." oninput="filterUpboList(this.value)">
+                                    ${isAdminMode ? `<button onclick="openAddUserModal()" class="bg-[#FF8E9E] text-white text-xs px-2.5 py-1.5 rounded-lg border border-brand"><i class="fa-solid fa-user-plus"></i></button>` : ''}
                                 </div>
                             </div>
                             <div id="upbo-grid-container" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-3.5">${upboCards}</div>
                         </div>
                     `;
                 } else if (section.id === 'sigballoon') {
+                    // 8. 시그풍 리스트 🍬 (293x164 정비율 완벽지원 레이아웃 및 복사 버튼 제거 완료)
                     let sigRows = '';
                     const sigs = globalSigballoonData.length > 0 ? globalSigballoonData : defaultSigballoonData;
 
                     sigs.forEach((sig, index) => {
                         const deleteBtn = isAdminMode ? `
-                            <div class="flex items-center gap-2 mt-4 self-start">
-                                <button onclick="triggerDeleteSigballoonPrompt(${index})" class="text-[11px] bg-red-100 hover:bg-red-200 text-red-600 font-bold px-3 py-1.5 rounded-xl border border-red-300 transition-colors flex items-center gap-1" title="시그풍 삭제">
-                                    <i class="fa-solid fa-trash-can text-xs"></i> 삭제하기
-                                </button>
-                            </div>
+                            <button onclick="deleteSigballoon(${index})" class="text-gray-400 hover:text-red-500 transition-colors p-2.5 hover:scale-110" title="시그풍 삭제">
+                                <i class="fa-solid fa-trash-can text-sm"></i>
+                            </button>
                         ` : '';
 
-                        // 배경 투명 PNG에 이상적인 293*164 크기 하드 스펙 뷰박스 지원화 완료
-                        const imageContainer = sig.image ? `
-                            <div class="w-full md:w-[293px] h-[164px] flex-shrink-0 flex items-center justify-center bg-transparent border-2 border-dashed border-[#FFC2CD] rounded-2xl overflow-hidden relative shadow-inner">
-                                <img src="${sig.image}" alt="${sig.name}" class="max-w-full max-h-full object-contain bg-transparent" onerror="this.src='https://placehold.co/293x164/FEDBE0/FF6B8B?text=Reaction+Image'">
-                            </div>
-                        ` : '';
+                        const imageContainer = sig.img 
+                            ? `<div class="w-[293px] h-[164px] max-w-full rounded-2xl overflow-hidden bg-transparent flex items-center justify-center flex-shrink-0 border-2 border-brand/20 relative">
+                                 <img src="${sig.img}" class="w-full h-full object-contain" alt="${sig.name}" onerror="this.src='https://placehold.co/293x164/FFF0F2/FF8E9E?text=WouJURY+Sig+💖'">
+                               </div>`
+                            : `<div class="w-[293px] h-[164px] max-w-full rounded-2xl bg-[#FFF0F2] dark:bg-[#1C1516]/50 flex items-center justify-center flex-shrink-0 border border-dashed border-brand/40">
+                                 <span class="text-xs text-gray-400 font-bold">이미지 없음 🍭</span>
+                               </div>`;
 
                         sigRows += `
-                            <div class="flex flex-col md:flex-row items-stretch justify-between p-4 bg-brand-light dark:bg-brand-darkCardBg rounded-3xl border border-[#FFC2CD]/50 dark:border-brand/20 gap-4 hover:scale-[1.01] transition-all duration-300">
-                                <div class="flex-grow flex flex-col justify-between py-1">
-                                    <div class="flex items-start gap-3">
-                                        <span class="w-16 flex-shrink-0 text-center bg-gradient-to-r from-brand-accent to-[#FF8FA3] text-white font-mono font-bold text-xs px-2.5 py-1.5 rounded-xl shadow-sm">
+                            <div class="flex flex-col md:flex-row items-center p-4 bg-[#FFF0F2]/50 dark:bg-brand-darkCardBg rounded-[2rem] border-2 border-brand/30 gap-5 hover:scale-[1.01] transition-transform">
+                                ${imageContainer}
+                                <div class="flex-grow min-w-0 text-center md:text-left">
+                                    <div class="flex flex-col md:flex-row items-center gap-2 mb-2">
+                                        <span class="inline-block bg-[#FF8E9E] text-white dark:bg-brand dark:text-brand-dark font-mono font-bold text-xs px-3 py-1 rounded-xl border border-brand">
                                             🎈 ${sig.count}
                                         </span>
-                                        <div class="min-w-0 flex-grow">
-                                            <h4 class="text-sm font-bold text-brand-dark dark:text-white break-all leading-snug">${sig.name}</h4>
-                                            <p class="text-[11px] text-pink-600 dark:text-pink-300 mt-1 leading-relaxed break-all">${sig.desc}</p>
-                                        </div>
+                                        <h4 class="text-sm sm:text-base font-bold text-brand-dark dark:text-white truncate">${sig.name}</h4>
                                     </div>
+                                    <p class="text-xs text-gray-500 dark:text-pink-300 mt-1 leading-relaxed font-semibold">${sig.desc}</p>
+                                </div>
+                                <div class="flex items-center gap-2 flex-shrink-0 self-end md:self-center">
                                     ${deleteBtn}
                                 </div>
-                                ${imageContainer}
                             </div>
                         `;
                     });
 
                     sectionHtml = `
-                        <div class="bg-white/80 dark:bg-brand-darkCardBg border-4 border-brand-accent/25 dark:border-brand/40 rounded-3xl p-6 box-shadow-lovely hover-card-effect relative transition-colors duration-300">
-                            <div class="flex justify-between items-center mb-4 border-b-2 border-brand-light dark:border-brand-darkCardBg pb-2">
-                                <h3 class="text-lg font-lovely font-bold text-brand-dark dark:text-white flex items-center gap-2">
+                        <div class="bg-white dark:bg-brand-darkCardBg border-4 border-brand rounded-3xl p-6 box-shadow-lovely relative transition-colors duration-300">
+                            <div class="flex justify-between items-center mb-4 border-b border-brand/40 pb-2">
+                                <h3 class="text-lg font-bold text-brand-dark dark:text-white flex items-center gap-2">
                                     <span class="text-xl">🍬</span> ${section.title}
                                 </h3>
-                                ${isAdminMode ? `<button onclick="openAddSigballoonModal()" class="text-brand-accent dark:text-brand hover:scale-125 p-1" title="시그풍 추가"><i class="fa-solid fa-plus-circle text-lg"></i></button>` : ''}
+                                ${isAdminMode ? `<button onclick="openAddSigballoonModal()" class="text-[#FF8E9E] hover:scale-110 p-1" title="시그풍 추가"><i class="fa-solid fa-plus-circle text-xl"></i></button>` : ''}
                             </div>
                             <div class="grid grid-cols-1 gap-4 font-semibold max-h-[500px] overflow-y-auto pr-1">${sigRows}</div>
                         </div>
@@ -1160,9 +1154,9 @@
                 
                 const diffDays = Math.ceil((targetDate - today) / (1000 * 60 * 60 * 24));
                 if (diffDays === 0 || (today.getMonth() === month && today.getDate() === day)) {
-                    return '<span class="text-brand-accent font-bold animate-bounce block text-xs">주리 생일 축하해요! 🎂💖</span>';
+                    return '<span class="text-[#FF8E9E] font-bold animate-bounce block text-xs">주리 생일 축하해요! 🎂💖</span>';
                 }
-                return `<span class="text-brand-accent font-bold text-base">D-${diffDays}</span>`;
+                return `<span class="text-[#E23F82] font-bold text-base">D-${diffDays}</span>`;
             } else if (type === 'anniversary') {
                 const parts = dateStr.replace(/[^0-9]/g, '-').split('-').filter(p => p !== '');
                 if (parts.length < 3) return "날짜 오류";
@@ -1170,7 +1164,7 @@
                 
                 const diffDays = Math.floor((today - targetDate) / (1000 * 60 * 60 * 24)) + 1;
                 if (diffDays <= 0) return `<span class="text-gray-400 text-xs">데뷔 전</span>`;
-                return `<span class="text-brand-accent font-bold text-base">${diffDays}일째 🍀</span>`;
+                return `<span class="text-[#FF8E9E] font-bold text-base">${diffDays}일째 🍀</span>`;
             } else {
                 const parts = dateStr.replace(/[^0-9]/g, '-').split('-').filter(p => p !== '');
                 if (parts.length < 3) return "날짜 오류";
@@ -1178,8 +1172,8 @@
                 targetDate.setHours(0,0,0,0);
                 
                 const diffDays = Math.ceil((targetDate - today) / (1000 * 60 * 60 * 24));
-                if (diffDays === 0) return '<span class="text-brand-accentPurple font-bold text-xs animate-pulse">오늘이 디데이! ✨</span>';
-                else if (diffDays > 0) return `<span class="text-brand-accentPurple font-bold text-base">D-${diffDays}</span>`;
+                if (diffDays === 0) return '<span class="text-brand-accentGreen font-bold text-xs animate-pulse">오늘이 디데이! ✨</span>';
+                else if (diffDays > 0) return `<span class="text-brand-accentGreen font-bold text-base">D-${diffDays}</span>`;
                 else return `<span class="text-gray-400 text-xs">완료 (D+${Math.abs(diffDays)})</span>`;
             }
         }
@@ -1195,30 +1189,17 @@
                         <img src="${avatarUrl}" 
                              onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');" 
                              alt="${user.nickname}" 
-                             class="w-full h-full rounded-full object-cover border-2 border-brand-accent bg-white shadow-sm">
-                        <div class="hidden w-full h-full rounded-full bg-brand-light dark:bg-brand-dark border-2 border-brand-accent flex items-center justify-center select-none font-bold">💖</div>
+                             class="w-full h-full rounded-full object-cover border-2 border-brand bg-white">
+                        <div class="hidden w-full h-full rounded-full bg-brand dark:bg-brand-dark/50 border-2 border-brand flex items-center justify-center select-none">💖</div>
                     </div>
                 `;
             } else {
                 return `
-                    <div class="${sizeClass} rounded-full bg-brand-light dark:bg-brand-dark/50 border-2 border-brand-accent flex items-center justify-center flex-shrink-0 select-none font-bold">
+                    <div class="${sizeClass} rounded-full bg-brand dark:bg-brand-dark/50 border-2 border-brand flex items-center justify-center flex-shrink-0 select-none">
                         💖
                     </div>
                 `;
             }
-        }
-
-        function copyReaction(count, name) {
-            const copyText = `!시그 ${count} - ${name}`;
-            
-            const dummy = document.createElement("textarea");
-            document.body.appendChild(dummy);
-            dummy.value = copyText;
-            dummy.select();
-            document.execCommand("copy");
-            document.body.removeChild(dummy);
-
-            showToast(`"${count}개 시그풍" 리액션 신청 복사 완료! ⭐`);
         }
 
         function filterUpboList(keyword) {
@@ -1233,37 +1214,40 @@
             container.innerHTML = '';
 
             if (filtered.length === 0) {
-                container.innerHTML = `<div class="col-span-full text-center text-xs text-pink-400 py-6 font-bold">검색된 죄수단이 없습니다.</div>`;
+                container.innerHTML = `<div class="col-span-full text-center text-xs text-gray-400 py-6 font-bold">검색된 죄수단이 없습니다.</div>`;
                 return;
             }
 
             filtered.forEach(user => {
                 const totalItems = (user.items || []).reduce((sum, item) => sum + item.count, 0);
                 const avatarHtml = getAvatarHTML(user, true);
-                const adminBadge = isAdminMode ? `<div class="absolute top-2 right-2 text-brand-accent"><i class="fa-solid fa-pen-to-square text-xs"></i></div>` : '';
+                const adminBadge = isAdminMode ? `<div class="absolute top-2 right-2 text-[#FF8E9E]"><i class="fa-solid fa-pen-to-square text-xs"></i></div>` : '';
 
                 container.innerHTML += `
-                    <div onclick="clickUpboCard('${user.id}')" class="bg-white dark:bg-[#1C1516] border-2 border-pink-200 dark:border-brand/45 rounded-2xl p-4 flex flex-col items-center justify-center cursor-pointer hover:bg-brand-light hover:scale-105 transition-all shadow-md relative">
+                    <div onclick="clickUpboCard('${user.id}')" class="bg-white dark:bg-[#1C1516] border-2 border-brand rounded-2xl p-4 flex flex-col items-center justify-center cursor-pointer hover:bg-brand-light/50 hover:translate-y-[-2px] transition-all shadow-sm relative">
                         ${adminBadge}
                         ${avatarHtml}
                         <div class="text-brand-dark dark:text-pink-100 font-bold text-xs truncate w-full text-center mb-1.5">${user.nickname}</div>
-                        <div class="bg-brand-accent text-white text-[9px] font-bold px-2 py-0.5 rounded-lg">리액션 ${totalItems}개</div>
+                        <div class="bg-[#FF8E9E] text-white text-[9px] font-bold px-2 py-0.5 rounded-md">리액션 ${totalItems}개</div>
                     </div>
                 `;
             });
         }
 
+        // 관리 모드 PIN 인증 (패스워드: 012172)
         function openAdminLoginModal() {
             if (isAdminMode) {
                 isAdminMode = false;
                 document.getElementById('admin-indicator').classList.add('hidden');
+                document.getElementById('banner-admin-overlay').classList.remove('opacity-100', 'pointer-events-auto');
+                document.getElementById('banner-admin-overlay').classList.add('opacity-0', 'pointer-events-none');
                 renderEverything();
-                showToast("로그아웃 되었습니다.");
+                lovelyAlert("로그아웃 되었습니다.", "안내 🔒");
                 return;
             }
             const modal = document.getElementById('admin-login-modal');
             modal.classList.remove('opacity-0', 'pointer-events-none');
-            modal.querySelector('div').classList.remove('scale-100');
+            modal.querySelector('div').classList.remove('scale-95');
             modal.querySelector('div').classList.add('scale-100');
             document.getElementById('admin-pin').value = '';
             document.getElementById('admin-pin').focus();
@@ -1281,18 +1265,80 @@
                 isAdminMode = true;
                 closeAdminLoginModal();
                 document.getElementById('admin-indicator').classList.remove('hidden');
+                document.getElementById('banner-admin-overlay').classList.remove('opacity-0', 'pointer-events-none');
+                document.getElementById('banner-admin-overlay').classList.add('opacity-100', 'pointer-events-auto');
+                
                 renderEverything();
-                showLovelyAlert("인증 성공! 💖", "우주리님을 위한 러블리 관리인증이 완료되었습니다. 이제 모든 영역을 실시간으로 가꾸실 수 있습니다잇!", "🧸");
+                lovelyAlert("우주리 관리센터 인증에 성공했습니다! 🛠️", "인증 완료 💖");
             } else {
                 const input = document.getElementById('admin-pin');
                 input.classList.add('border-red-500');
                 input.value = '';
-                input.placeholder = '비밀번호 틀림!';
+                input.placeholder = '비밀번호 불일치!';
                 setTimeout(() => {
                     input.classList.remove('border-red-500');
                     input.placeholder = '••••••••';
                 }, 1500);
             }
+        }
+
+        function triggerBannerChange() {
+            const modal = document.getElementById('banner-edit-modal');
+            document.getElementById('banner-url').value = globalProfileData.bannerImg || '';
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.remove('scale-95');
+            modal.querySelector('div').classList.add('scale-100');
+        }
+
+        function closeBannerEditModal() {
+            const modal = document.getElementById('banner-edit-modal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.add('scale-95');
+        }
+
+        function uploadBannerFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('banner-url').value = e.target.result;
+                showToast("사진이 준비되었습니다. 변경 완료를 눌러주세요!");
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function submitBannerChanges() {
+            const urlInput = document.getElementById('banner-url').value.trim();
+            if (!urlInput) {
+                lovelyAlert("올바른 이미지 주소 또는 사진 파일을 지정해 주세요!");
+                return;
+            }
+            
+            globalProfileData.bannerImg = urlInput;
+            updateFirestore('profile', globalProfileData);
+            closeBannerEditModal();
+            renderEverything();
+            showToast("배너 사진 변경 완료! 🌸");
+        }
+
+        function previewSigImage(event) {
+            const file = event.target.files[0];
+            const previewContainer = document.getElementById('new-sig-preview-container');
+            const previewImg = document.getElementById('new-sig-preview-img');
+
+            if (!file) {
+                previewContainer.classList.add('hidden');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('new-sig-url').value = e.target.result;
+                previewImg.src = e.target.result;
+                previewContainer.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
         }
 
         function openSectionManagerModal() {
@@ -1317,17 +1363,17 @@
 
             globalSections.forEach((sec, idx) => {
                 const isEnabled = sec.enabled;
-                const toggleIcon = isEnabled ? 'fa-toggle-on text-brand-accent' : 'fa-toggle-off text-gray-300';
+                const toggleIcon = isEnabled ? 'fa-toggle-on text-[#66BB6A]' : 'fa-toggle-off text-gray-300';
                 
                 list.innerHTML += `
-                    <div class="flex items-center justify-between p-3 bg-brand-light dark:bg-brand-dark/30 border-2 border-brand-accent/20 dark:border-brand/40 rounded-2xl font-bold text-xs">
+                    <div class="flex items-center justify-between p-3 bg-[#FFF0F2] dark:bg-brand-dark/30 border-2 border-brand rounded-2xl font-bold text-xs">
                         <div class="flex items-center gap-2">
                             <span class="text-brand-dark dark:text-white">${sec.title}</span>
-                            <span class="text-[9px] bg-brand-accent text-white px-1.5 py-0.5 rounded-lg">${sec.id}</span>
+                            <span class="text-[9px] bg-[#FF8E9E] text-white px-1.5 py-0.5 rounded">${sec.id}</span>
                         </div>
                         <div class="flex items-center gap-2.5">
-                            <button onclick="moveSection(${idx}, -1)" class="p-1 text-pink-400 hover:text-brand-accent"><i class="fa-solid fa-arrow-up"></i></button>
-                            <button onclick="moveSection(${idx}, 1)" class="p-1 text-pink-400 hover:text-brand-accent"><i class="fa-solid fa-arrow-down"></i></button>
+                            <button onclick="moveSection(${idx}, -1)" class="p-1 text-gray-400 hover:text-brand-dark"><i class="fa-solid fa-arrow-up"></i></button>
+                            <button onclick="moveSection(${idx}, 1)" class="p-1 text-gray-400 hover:text-brand-dark"><i class="fa-solid fa-arrow-down"></i></button>
                             <button onclick="toggleSectionState(${idx})" class="text-xl transition-all"><i class="fa-solid ${toggleIcon}"></i></button>
                         </div>
                     </div>
@@ -1353,18 +1399,13 @@
             renderSectionManagerList();
         }
 
-        function triggerDefaultResetPrompt() {
-            showLovelyConfirm(
-                "프로필 항목 초기화",
-                "모든 프로필 항목 구성과 정렬 순서를 초기 기본 세팅으로 되돌릴까요?",
-                () => {
-                    globalSections = JSON.parse(JSON.stringify(defaultSections));
-                    updateFirestore('sections', globalSections);
-                    renderSectionManagerList();
-                    showToast("항목 정렬이 초기화되었습니다 🧸");
-                },
-                "🧹"
-            );
+        function resetSectionsToDefault() {
+            lovelyConfirm("모든 프로필 노출 순서와 설정을 기본값으로 초기화할까요?", () => {
+                globalSections = JSON.parse(JSON.stringify(defaultSections));
+                updateFirestore('sections', globalSections);
+                renderSectionManagerList();
+                showToast("구조 초기화 완료!");
+            });
         }
 
         function editSectionContent(sectionId) {
@@ -1376,16 +1417,16 @@
             container.innerHTML = '';
             
             if (sectionId === 'intro') {
-                titleEl.innerHTML = '<i class="fa-solid fa-circle-user text-brand-accent"></i> 자기소개 정보 수정';
+                titleEl.innerHTML = '<i class="fa-solid fa-circle-user text-[#FF8E9E]"></i> 자기소개 정보 수정';
                 container.innerHTML = `
                     <div class="text-xs font-bold space-y-3">
                         <div>
                             <label class="block text-gray-500 mb-1">자기소개 본문</label>
-                            <textarea id="edit-intro-text" rows="5" class="w-full bg-brand-light dark:bg-black/40 border-2 border-[#FFC2CD] rounded-2xl p-3 outline-none resize-none">${globalProfileData.introText || ''}</textarea>
+                            <textarea id="edit-intro-text" rows="5" class="w-full bg-[#FFF5F6] border-2 border-brand rounded-xl p-3 outline-none resize-none">${globalProfileData.introText || ''}</textarea>
                         </div>
                         <div>
-                            <label class="block text-gray-500 mb-1">키워드 해시태그 (쉼표(,)로 분리)</label>
-                            <input type="text" id="edit-intro-tags" value="${(globalProfileData.tags || []).join(', ')}" class="w-full bg-brand-light dark:bg-black/40 border-2 border-[#FFC2CD] rounded-2xl p-3 outline-none">
+                            <label class="block text-gray-500 mb-1">키워드 해시태그 (쉼표로 구분)</label>
+                            <input type="text" id="edit-intro-tags" value="${(globalProfileData.tags || []).join(', ')}" class="w-full bg-[#FFF5F6] border-2 border-brand rounded-xl p-3 outline-none">
                         </div>
                     </div>
                 `;
@@ -1398,16 +1439,16 @@
                     showToast("자기소개 수정 완료 💖");
                 };
             } else if (sectionId === 'likehate') {
-                titleEl.innerHTML = '<i class="fa-solid fa-heart text-brand-accent"></i> 호불호 리스트 수정';
+                titleEl.innerHTML = '<i class="fa-solid fa-heart text-[#66BB6A]"></i> 호불호 리스트 수정';
                 container.innerHTML = `
                     <div class="text-xs font-bold space-y-3">
                         <div>
-                            <label class="block text-gray-500 mb-1">좋아하는 거 (쉼표(,)로 분리)</label>
-                            <input type="text" id="edit-likes" value="${(globalProfileData.likes || []).join(', ')}" class="w-full bg-brand-light dark:bg-black/40 border-2 border-[#FFC2CD] rounded-2xl p-3 outline-none">
+                            <label class="block text-gray-500 mb-1">좋아하는 거 (쉼표로 구분)</label>
+                            <input type="text" id="edit-likes" value="${(globalProfileData.likes || []).join(', ')}" class="w-full bg-[#FFF5F6] border-2 border-brand rounded-xl p-3 outline-none">
                         </div>
                         <div>
-                            <label class="block text-gray-500 mb-1">극혐하는 거 (쉼표(,)로 분리)</label>
-                            <input type="text" id="edit-dislikes" value="${(globalProfileData.dislikes || []).join(', ')}" class="w-full bg-brand-light dark:bg-black/40 border-2 border-[#FFC2CD] rounded-2xl p-3 outline-none">
+                            <label class="block text-gray-500 mb-1">싫어하는 거 (쉼표로 구분)</label>
+                            <input type="text" id="edit-dislikes" value="${(globalProfileData.dislikes || []).join(', ')}" class="w-full bg-[#FFF5F6] border-2 border-brand rounded-xl p-3 outline-none">
                         </div>
                     </div>
                 `;
@@ -1417,24 +1458,24 @@
                     updateFirestore('profile', globalProfileData);
                     closeGeneralEditModal();
                     renderEverything();
-                    showToast("호불호 항목 업데이트 완료!");
+                    showToast("호불호 수정 완료! 🌱");
                 };
             } else if (sectionId === 'broadcast') {
-                titleEl.innerHTML = '<i class="fa-solid fa-microphone text-brand-accent"></i> 실시간 방송 구성 정보';
+                titleEl.innerHTML = '<i class="fa-solid fa-microphone text-[#FF8E9E]"></i> 방송 구성 정보 설정';
                 const bc = globalProfileData.broadcast || defaultProfileData.broadcast;
                 container.innerHTML = `
                     <div class="text-xs font-bold space-y-3">
                         <div>
                             <label class="block text-gray-500 mb-1">ON-AIR 시간안내</label>
-                            <input type="text" id="edit-bc-time" value="${bc.time}" class="w-full bg-brand-light dark:bg-black/40 border-2 border-[#FFC2CD] rounded-2xl p-3 outline-none">
+                            <input type="text" id="edit-bc-time" value="${bc.time}" class="w-full bg-[#FFF5F6] border-2 border-brand rounded-xl p-3 outline-none">
                         </div>
                         <div>
                             <label class="block text-gray-500 mb-1">주 콘텐츠 구성</label>
-                            <input type="text" id="edit-bc-content" value="${bc.content}" class="w-full bg-brand-light dark:bg-black/40 border-2 border-[#FFC2CD] rounded-2xl p-3 outline-none">
+                            <input type="text" id="edit-bc-content" value="${bc.content}" class="w-full bg-[#FFF5F6] border-2 border-brand rounded-xl p-3 outline-none">
                         </div>
                         <div>
-                            <label class="block text-gray-500 mb-1">채널 시청 규칙</label>
-                            <input type="text" id="edit-bc-rules" value="${bc.rules}" class="w-full bg-brand-light dark:bg-black/40 border-2 border-[#FFC2CD] rounded-2xl p-3 outline-none">
+                            <label class="block text-gray-500 mb-1">시청 규칙</label>
+                            <input type="text" id="edit-bc-rules" value="${bc.rules}" class="w-full bg-[#FFF5F6] border-2 border-brand rounded-xl p-3 outline-none">
                         </div>
                     </div>
                 `;
@@ -1447,69 +1488,9 @@
                     updateFirestore('profile', globalProfileData);
                     closeGeneralEditModal();
                     renderEverything();
-                    showToast("방송 설정 변경 완료!");
+                    showToast("방송 설정 업데이트 완료!");
                 };
             }
-
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            modal.querySelector('div').classList.remove('scale-95');
-            modal.querySelector('div').classList.add('scale-100');
-        }
-
-        // 우주리 대표 배너 파일 직접 업로드 및 URL 통합 마스터
-        function openBannerEditModal() {
-            const modal = document.getElementById('general-edit-modal');
-            const titleEl = document.getElementById('general-edit-title');
-            const container = document.getElementById('general-edit-fields');
-            const saveBtn = document.getElementById('general-edit-save-btn');
-            
-            titleEl.innerHTML = '<i class="fa-solid fa-panorama text-brand-accent"></i> 대표 배너 사진 수정';
-            container.innerHTML = `
-                <div class="text-xs font-bold space-y-4">
-                    <div>
-                        <label class="block text-brand-accent mb-1"><i class="fa-solid fa-file-arrow-up mr-1"></i> 방법 1. 배너 이미지 파일 직접 올리기</label>
-                        <input type="file" id="upload-banner-file" accept="image/*" class="w-full bg-brand-light dark:bg-black/40 border-2 border-[#FFC2CD] rounded-2xl p-2 outline-none">
-                        <p class="text-[10px] text-pink-500 mt-1">※ 모바일/PC 로컬 사진 파일을 직접 선택해 대표 배너를 바로 바꿀 수 있습니다잇!</p>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <div class="flex-grow border-t border-gray-300"></div>
-                        <span class="text-[9px] text-gray-400 font-bold">OR</span>
-                        <div class="flex-grow border-t border-gray-300"></div>
-                    </div>
-                    <div>
-                        <label class="block text-gray-500 mb-1">방법 2. 웹 이미지 링크 주소 입력 (URL)</label>
-                        <input type="text" id="edit-banner-url" value="${globalProfileData.bannerImg || ''}" class="w-full bg-brand-light dark:bg-black/40 border-2 border-[#FFC2CD] rounded-2xl p-3 outline-none" placeholder="https://example.com/banner.jpg">
-                    </div>
-                </div>
-            `;
-            
-            let bannerBase64Data = '';
-            const fileInput = document.getElementById('upload-banner-file');
-            fileInput.onchange = (e) => {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = (event) => {
-                        bannerBase64Data = event.target.result;
-                        showToast("배너 파일 준비 완료 📸");
-                    };
-                    reader.readAsDataURL(file);
-                }
-            };
-
-            saveBtn.onclick = () => {
-                const urlVal = document.getElementById('edit-banner-url').value.trim();
-                if (bannerBase64Data) {
-                    globalProfileData.bannerImg = bannerBase64Data;
-                } else if (urlVal) {
-                    globalProfileData.bannerImg = urlVal;
-                }
-                
-                updateFirestore('profile', globalProfileData);
-                closeGeneralEditModal();
-                renderEverything();
-                showToast("배너 이미지가 성공적으로 반영되었습니다잇! 🌸");
-            };
 
             modal.classList.remove('opacity-0', 'pointer-events-none');
             modal.querySelector('div').classList.remove('scale-95');
@@ -1522,6 +1503,7 @@
             modal.querySelector('div').classList.add('scale-95');
         }
 
+        // 업보 보드판 클릭 처리
         function clickUpboCard(userId) {
             const upboList = globalUpboData.length > 0 ? globalUpboData : defaultUpboData;
             const target = upboList.find(u => u.id === userId);
@@ -1544,22 +1526,22 @@
             }
 
             const itemsHtml = (user.items || []).length > 0 ? user.items.map(item => `
-                <div class="flex justify-between items-center bg-brand-light/40 dark:bg-zinc-850 border border-[#FFC2CD]/40 rounded-xl p-3.5 mb-2 font-bold text-xs">
-                    <span class="text-[#3D1E22] dark:text-pink-100">${item.name}</span>
-                    <span class="text-white font-bold bg-brand-accent px-2.5 py-0.5 rounded-lg text-[10px]">×${item.count}</span>
+                <div class="flex justify-between items-center bg-[#FFF0F2] dark:bg-zinc-800 border border-brand rounded-xl p-3.5 mb-2 font-bold text-xs">
+                    <span class="text-brand-dark dark:text-pink-100">${item.name}</span>
+                    <span class="text-[#FF8E9E] font-bold bg-[#FFCCD3]/30 px-2.5 py-0.5 rounded-lg text-[10px]">×${item.count}</span>
                 </div>
-            `).join('') : `<div class="text-center text-pink-400 py-8 font-bold text-xs">남아있는 숙제/리액션 벌칙이 전혀 없습니다! 프리패스 ✨</div>`;
+            `).join('') : `<div class="text-center text-gray-400 py-8 font-bold text-xs">남아있는 숙제/리액션 벌칙이 전혀 없습니다! 프리패스 ✨</div>`;
 
             const avatarHtml = getAvatarHTML(user, false);
 
             modal.innerHTML = `
-                <div class="bg-white dark:bg-brand-darkCardBg rounded-3xl shadow-2xl w-11/12 max-w-sm overflow-hidden transform scale-95 transition-transform duration-300 border-4 border-brand-accent">
-                    <div class="p-4 flex items-center justify-between border-b-2 border-brand-accent bg-[#FFF5F6] dark:bg-black/35">
+                <div class="bg-white dark:bg-brand-darkCardBg rounded-[2rem] shadow-2xl w-11/12 max-w-sm overflow-hidden transform scale-95 transition-transform duration-300 border-4 border-brand">
+                    <div class="p-4 flex items-center justify-between border-b-2 border-brand bg-[#FFF0F2] dark:bg-black/35">
                         <div class="flex items-center gap-2.5">
                             ${avatarHtml}
                             <div>
                                 <div class="text-brand-dark dark:text-white font-bold text-sm">${user.nickname}</div>
-                                <div class="text-pink-400 text-[10px] font-bold">(${user.id})</div>
+                                <div class="text-gray-400 text-[9px]">(${user.id})</div>
                             </div>
                         </div>
                         <button onclick="closeUpboModal()" class="text-brand-dark dark:text-pink-100 p-2"><i class="fa-solid fa-xmark text-xl"></i></button>
@@ -1576,7 +1558,7 @@
             modal.addEventListener('click', (e) => { if (e.target === modal) closeUpboModal(); });
         }
 
-        function closeUpboModal() {
+        window.closeUpboModal = function() {
             const modal = document.getElementById('upbo-detail-modal');
             if (modal) {
                 modal.classList.add('opacity-0', 'pointer-events-none');
@@ -1593,7 +1575,7 @@
                 ${avatarHtml}
                 <div>
                     <div class="text-brand-dark dark:text-white font-bold text-sm">${user.nickname} 편집</div>
-                    <div class="text-pink-400 text-[10px] font-bold">(${user.id})</div>
+                    <div class="text-gray-400 text-[9px] font-bold">(${user.id})</div>
                 </div>
             `;
 
@@ -1602,7 +1584,7 @@
                 deleteUserBtn.classList.remove('hidden');
                 deleteConfirmState = false;
                 deleteUserBtn.innerHTML = `<i class="fa-solid fa-user-minus"></i> 죄수단 삭제`;
-                deleteUserBtn.className = "text-[11px] bg-red-100 text-red-600 font-bold px-2.5 py-1.5 rounded-xl border border-red-500 hover:bg-red-200 transition-colors";
+                deleteUserBtn.className = "text-[10px] bg-red-100 text-red-600 font-bold px-2.5 py-1.5 rounded-lg border border-red-500 hover:bg-red-200";
                 deleteUserBtn.onclick = () => handleDeleteUser(user.id);
             }
 
@@ -1625,12 +1607,12 @@
 
             if (!deleteConfirmState) {
                 deleteConfirmState = true;
-                btn.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> 정말삭제?`;
-                btn.className = "text-[11px] bg-red-600 text-white font-bold px-2.5 py-1.5 rounded-xl animate-pulse";
+                btn.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> 정말 삭제?`;
+                btn.className = "text-[10px] bg-red-600 text-white font-bold px-2.5 py-1.5 rounded-lg border border-brand-dark animate-pulse";
                 setTimeout(() => {
                     if (deleteConfirmState && currentEditingUserId === userId) {
                         btn.innerHTML = `<i class="fa-solid fa-user-minus"></i> 죄수단 삭제`;
-                        btn.className = "text-[11px] bg-red-100 text-red-600 font-bold px-2.5 py-1.5 rounded-xl border border-red-500 hover:bg-red-200";
+                        btn.className = "text-[10px] bg-red-100 text-red-600 font-bold px-2.5 py-1.5 rounded-lg border border-red-500 hover:bg-red-200";
                         deleteConfirmState = false;
                     }
                 }, 3000);
@@ -1640,7 +1622,7 @@
                 closeUpboEditModal();
                 renderEverything();
                 deleteConfirmState = false;
-                showToast("죄수단이 삭제되었습니다.");
+                showToast("죄수단 삭제 성공 🌸");
             }
         }
 
@@ -1649,18 +1631,18 @@
             const body = document.getElementById('edit-modal-body');
             
             if (!user.items || user.items.length === 0) {
-                body.innerHTML = `<div class="text-center text-pink-400 py-6 font-bold text-xs">수정할 수 있는 리액션 항목이 비어있습니다.</div>`;
+                body.innerHTML = `<div class="text-center text-gray-400 py-6 font-bold text-xs">수정할 수 있는 리액션 항목이 비어있습니다.</div>`;
                 return;
             }
 
             body.innerHTML = user.items.map((item, index) => `
-                <div class="flex justify-between items-center bg-brand-light dark:bg-zinc-800 border border-[#FFC2CD]/30 rounded-xl p-3 mb-2 font-bold text-xs">
+                <div class="flex justify-between items-center bg-[#FFF5F6] dark:bg-zinc-850 border border-brand rounded-xl p-3 mb-2 font-bold text-xs">
                     <span class="text-brand-dark dark:text-pink-100">${item.name}</span>
                     <div class="flex items-center gap-2">
-                        <button onclick="changeItemCount(${index}, -1)" class="w-6 h-6 flex items-center justify-center rounded-lg bg-gray-250 dark:bg-zinc-700 text-gray-700 hover:bg-red-100"><i class="fa-solid fa-minus text-[10px]"></i></button>
+                        <button onclick="changeItemCount(${index}, -1)" class="w-6 h-6 flex items-center justify-center rounded-lg bg-gray-200 dark:bg-zinc-800 text-gray-700 hover:bg-red-100"><i class="fa-solid fa-minus text-[10px]"></i></button>
                         <span class="w-5 text-center text-xs dark:text-white">${item.count}</span>
-                        <button onclick="changeItemCount(${index}, 1)" class="w-6 h-6 flex items-center justify-center rounded-lg bg-gray-250 dark:bg-zinc-700 text-gray-700 hover:bg-pink-100"><i class="fa-solid fa-plus text-[10px]"></i></button>
-                        <button onclick="deleteItem(${index})" class="ml-2 text-pink-400 hover:text-red-500 p-1"><i class="fa-solid fa-trash-can"></i></button>
+                        <button onclick="changeItemCount(${index}, 1)" class="w-6 h-6 flex items-center justify-center rounded-lg bg-gray-200 dark:bg-zinc-800 text-gray-700 hover:bg-pink-100"><i class="fa-solid fa-plus text-[10px]"></i></button>
+                        <button onclick="deleteItem(${index})" class="ml-2 text-gray-400 hover:text-red-500 p-1"><i class="fa-solid fa-trash-can"></i></button>
                     </div>
                 </div>
             `).join('');
@@ -1718,7 +1700,7 @@
             const nickInput = document.getElementById('new-user-nickname').value.trim();
 
             if (!nickInput) {
-                showToast("죄수단 닉네임을 꼭 입력해 주세요!");
+                lovelyAlert("죄수단 닉네임을 꼭 입력해 주세요!");
                 return;
             }
 
@@ -1728,7 +1710,7 @@
             updateFirestore('upbo', globalUpboData);
             closeAddUserModal();
             renderEverything();
-            showToast(`"${nickInput}" 죄수단을 보드판에 등록했습니다 🍀`);
+            showToast(`"${nickInput}" 죄수단을 등록했습니다!`);
         }
 
         function openNoticeEditModal() {
@@ -1755,16 +1737,16 @@
 
             notices.forEach((notice, index) => {
                 list.innerHTML += `
-                    <div class="bg-brand-light dark:bg-brand-dark/30 border border-brand-accent/20 p-3 rounded-2xl flex justify-between items-start gap-3 font-bold text-xs">
+                    <div class="bg-[#FFF5F6] dark:bg-brand-dark/30 border border-brand p-3 rounded-xl flex justify-between items-start gap-3 font-bold text-xs">
                         <div class="flex-grow min-w-0">
                             <div class="flex items-center gap-2 mb-1 flex-wrap">
-                                <span class="text-[9px] bg-brand-accent text-white px-1.5 py-0.5 rounded-lg">${notice.type}</span>
-                                <span class="text-[10px] text-pink-400">${notice.date}</span>
-                                ${notice.link ? `<span class="text-[8px] bg-brand text-brand-dark border border-brand-accent px-1.5 py-0.5 rounded-lg max-w-[150px] truncate" title="${notice.link}"><i class="fa-solid fa-link"></i> ${notice.link}</span>` : ''}
+                                <span class="text-[9px] bg-[#FF8E9E] text-white px-1.5 py-0.5 rounded">${notice.type}</span>
+                                <span class="text-[10px] text-gray-400">${notice.date}</span>
+                                ${notice.link ? `<span class="text-[8px] bg-brand text-brand-dark border border-brand px-1 py-0.5 rounded max-w-[150px] truncate" title="${notice.link}"><i class="fa-solid fa-link"></i> ${notice.link}</span>` : ''}
                             </div>
                             <p class="text-gray-700 dark:text-pink-100 break-all">${notice.content}</p>
                         </div>
-                        <button onclick="deleteNotice(${index})" class="text-pink-400 hover:text-red-500 p-1 flex-shrink-0"><i class="fa-solid fa-trash-can"></i></button>
+                        <button onclick="deleteNotice(${index})" class="text-gray-400 hover:text-red-500 p-1 flex-shrink-0"><i class="fa-solid fa-trash-can"></i></button>
                     </div>
                 `;
             });
@@ -1828,9 +1810,9 @@
 
             schedules.forEach((sched, index) => {
                 list.innerHTML += `
-                    <div class="flex items-center gap-3 bg-brand-light dark:bg-brand-dark/30 border border-brand-accent/20 p-2 rounded-2xl font-bold">
-                        <div class="w-6 text-center text-xs text-brand-accent font-bold">${sched.day}</div>
-                        <input type="text" id="schedule-input-${index}" value="${sched.content}" class="flex-grow bg-white dark:bg-black/40 border-2 border-[#FFC2CD] text-xs rounded-xl p-1.5 outline-none">
+                    <div class="flex items-center gap-3 bg-[#FFF5F6] dark:bg-brand-dark/30 border border-brand p-2 rounded-xl font-bold">
+                        <div class="w-6 text-center text-xs text-[#FF8E9E] font-bold">${sched.day}</div>
+                        <input type="text" id="schedule-input-${index}" value="${sched.content}" class="flex-grow bg-white dark:bg-black/40 border-2 border-brand text-xs rounded-lg p-1.5 outline-none">
                         <label class="flex items-center gap-1 text-[10px] text-gray-400 cursor-pointer flex-shrink-0">
                             <input type="checkbox" id="schedule-rest-${index}" ${sched.isRest ? 'checked' : ''} class="w-4 h-4 text-brand rounded focus:ring-brand">휴방
                         </label>
@@ -1856,33 +1838,13 @@
             closeScheduleEditModal();
         }
 
-        // 임시 시그풍용 Base64 상태 보존 변수
-        let tempSigImageBase64 = '';
-
         function openAddSigballoonModal() {
-            tempSigImageBase64 = ''; // 초기화
             const modal = document.getElementById('add-sigballoon-modal');
             document.getElementById('new-sig-count').value = '';
             document.getElementById('new-sig-name').value = '';
             document.getElementById('new-sig-desc').value = '';
-            document.getElementById('new-sig-image').value = '';
-            
-            const fileInput = document.getElementById('new-sig-file');
-            fileInput.value = ''; // 파일셀렉터 클리어
-
-            // 투명 배경 PNG의 경우 실시간 FileReader 변환 리스너 마운트
-            fileInput.onchange = (e) => {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = (event) => {
-                        tempSigImageBase64 = event.target.result;
-                        showToast("리액션 사진 로드 완료 🎨");
-                    };
-                    reader.readAsDataURL(file);
-                }
-            };
-
+            document.getElementById('new-sig-url').value = '';
+            document.getElementById('new-sig-preview-container').classList.add('hidden');
             modal.classList.remove('opacity-0', 'pointer-events-none');
         }
 
@@ -1894,38 +1856,30 @@
             const count = parseInt(document.getElementById('new-sig-count').value, 10);
             const name = document.getElementById('new-sig-name').value.trim();
             const desc = document.getElementById('new-sig-desc').value.trim();
-            const urlInput = document.getElementById('new-sig-image').value.trim();
+            const img = document.getElementById('new-sig-url').value.trim();
 
             if (!count || !name) {
-                showToast("풍선 갯수와 벌칙/리액션 내용을 반드시 적어주세요!");
+                lovelyAlert("수량과 미션 내용은 필수값입니다!");
                 return;
             }
 
-            // 직접 업로드한 PNG가 있을 경우 최우선, 없을 경우 수동 URL 채택
-            const finalImage = tempSigImageBase64 || urlInput;
-
-            globalSigballoonData.push({ count, name, desc, image: finalImage });
+            globalSigballoonData.push({ count, name, desc, img });
             globalSigballoonData.sort((a, b) => a.count - b.count);
 
             updateFirestore('sigballoon', globalSigballoonData);
             closeAddSigballoonModal();
             renderEverything();
-            showToast(`🎈 시그풍 리스트에 "${count}개" 리액션 등록 완료!`);
+            showToast(`🎈 시그풍 ${count}개 리액션이 성공적으로 등록되었습니다.`);
         }
 
-        function triggerDeleteSigballoonPrompt(index) {
+        function deleteSigballoon(index) {
             const deleted = globalSigballoonData[index];
-            showLovelyConfirm(
-                "시그풍 삭제 확인",
-                `"${deleted.count}개: ${deleted.name}" 시그니처 리액션 항목을 정말 삭제할까요?`,
-                () => {
-                    globalSigballoonData.splice(index, 1);
-                    updateFirestore('sigballoon', globalSigballoonData);
-                    renderEverything();
-                    showToast("시그풍 벌칙이 삭제되었습니다.");
-                },
-                "🎈"
-            );
+            lovelyConfirm(`"${deleted.count}개: ${deleted.name}" 미션을 영구 삭제할까요?`, () => {
+                globalSigballoonData.splice(index, 1);
+                updateFirestore('sigballoon', globalSigballoonData);
+                renderEverything();
+                showToast("시그풍이 성공적으로 삭제되었습니다.");
+            });
         }
 
         function openDdayEditModal() {
@@ -1952,15 +1906,15 @@
 
             ddays.forEach((dday, index) => {
                 list.innerHTML += `
-                    <div class="flex items-center gap-2 bg-brand-light p-2.5 rounded-2xl border border-[#FFC2CD] font-bold text-xs">
-                        <input type="text" id="dday-title-${index}" value="${dday.title}" class="w-1/3 bg-white border border-brand-accent rounded-xl p-1 outline-none text-[11px]" placeholder="기념일명">
-                        <select id="dday-type-${index}" class="w-1/4 bg-white border border-brand-accent rounded-xl p-1 outline-none text-[11px]">
+                    <div class="flex items-center gap-2 bg-[#FFF5F6] p-2.5 rounded-xl border border-brand font-bold text-xs">
+                        <input type="text" id="dday-title-${index}" value="${dday.title}" class="w-1/3 bg-white border border-brand rounded-lg p-1 outline-none text-[11px]" placeholder="기념일명">
+                        <select id="dday-type-${index}" class="w-1/4 bg-white border border-brand rounded-lg p-1 outline-none text-[11px]">
                             <option value="birthday" ${dday.type === 'birthday' ? 'selected' : ''}>생일</option>
                             <option value="anniversary" ${dday.type === 'anniversary' ? 'selected' : ''}>기념일</option>
                             <option value="dday" ${dday.type === 'dday' ? 'selected' : ''}>디데이</option>
                         </select>
-                        <input type="text" id="dday-date-${index}" value="${dday.date}" class="w-1/4 bg-white border border-brand-accent rounded-xl p-1 outline-none text-[11px]" placeholder="MM-DD or YYYY-MM-DD">
-                        <button onclick="deleteDdayRow(${index})" class="text-pink-400 hover:text-red-500 p-1"><i class="fa-solid fa-trash-can"></i></button>
+                        <input type="text" id="dday-date-${index}" value="${dday.date}" class="w-1/4 bg-white border border-brand rounded-lg p-1 outline-none text-[11px]" placeholder="MM-DD or YYYY-MM-DD">
+                        <button onclick="deleteDdayRow(${index})" class="text-gray-400 hover:text-red-500 p-1"><i class="fa-solid fa-trash-can"></i></button>
                     </div>
                 `;
             });
@@ -1999,7 +1953,7 @@
             closeDdayEditModal();
         }
 
-        // 글로벌 모달 트리거 바인딩
+        // 전역 전파 바인딩
         window.openAdminLoginModal = openAdminLoginModal;
         window.closeAdminLoginModal = closeAdminLoginModal;
         window.checkAdminPin = checkAdminPin;
@@ -2007,12 +1961,10 @@
         window.closeSectionManagerModal = closeSectionManagerModal;
         window.toggleSectionState = toggleSectionState;
         window.moveSection = moveSection;
-        window.triggerDefaultResetPrompt = triggerDefaultResetPrompt;
+        window.resetSectionsToDefault = resetSectionsToDefault;
         window.editSectionContent = editSectionContent;
-        window.openBannerEditModal = openBannerEditModal;
         window.closeGeneralEditModal = closeGeneralEditModal;
         window.clickUpboCard = clickUpboCard;
-        window.closeUpboModal = closeUpboModal;
         window.closeUpboEditModal = closeUpboEditModal;
         window.handleDeleteUser = handleDeleteUser;
         window.changeItemCount = changeItemCount;
@@ -2031,14 +1983,17 @@
         window.openAddSigballoonModal = openAddSigballoonModal;
         window.closeAddSigballoonModal = closeAddSigballoonModal;
         window.submitNewSigballoon = submitNewSigballoon;
-        window.triggerDeleteSigballoonPrompt = triggerDeleteSigballoonPrompt;
-        window.copyReaction = copyReaction;
+        window.deleteSigballoon = deleteSigballoon;
         window.openDdayEditModal = openDdayEditModal;
         window.closeDdayEditModal = closeDdayEditModal;
         window.addDdayRow = addDdayRow;
         window.deleteDdayRow = deleteDdayRow;
         window.saveDdayChanges = saveDdayChanges;
-        window.closeLovelyAlert = closeLovelyAlert;
+        window.triggerBannerChange = triggerBannerChange;
+        window.closeBannerEditModal = closeBannerEditModal;
+        window.uploadBannerFile = uploadBannerFile;
+        window.submitBannerChanges = submitBannerChanges;
+        window.previewSigImage = previewSigImage;
     </script>
 </body>
 </html>
